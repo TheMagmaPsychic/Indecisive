@@ -47,19 +47,14 @@ func manual_physics_process(delta):
 	else: #this is meant to give you a little control over your midair movement, but can make you go really fast too
 		velocity.x += movement_dir.x * speed * -0.1
 		velocity.z += movement_dir.z * speed * -0.1
-	if is_on_floor(): #Friction
+	if is_on_floor() : #Friction
 		velocity.x *= 0.6
 		velocity.z *= 0.6
 	else:
 		velocity.x *= 0.9
 		velocity.z *= 0.9
-	#var normie = Vector2(abs(velocity.x), abs(velocity.z)).normalized()
-	#print("Before: x|" + str(velocity.x) + " z|" + str(velocity.z))
-	#this is supposed to find the direction of travel (from x and z ratio), check if total speed is greater than max speed, then set speed to speed limit
-	#if abs(velocity.x * normie.x) + abs(velocity.z * normie.y) >= max_speed + (max_speed * int(is_sprinting) * sprint_multiplier - 1):
-	#	velocity.x = -int(velocity.x < 0) * abs(normie.x) * (max_speed) #+ (max_speed * int(is_sprinting) * (sprint_multiplier - 1)))
-	#	velocity.z = -int(velocity.z < 0) * abs(normie.y) * (max_speed) #+ (max_speed * int(is_sprinting) * (sprint_multiplier - 1)))
-	#print("After: x|" + str(velocity.x) + " z|" + str(velocity.z))
+	var normalized_speed = Vector2(velocity.x, velocity.z).normalized()
+	print("speed: " + str(abs(velocity.x * normalized_speed.x) + abs(velocity.z * normalized_speed.y)))
 	move_and_slide()
 
 func jump():
