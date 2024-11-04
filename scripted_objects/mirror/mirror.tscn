@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq6gg37ch27dw"]
+
+[ext_resource type="Script" path="res://mirror.gd" id="1_spk7d"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_j1dy2"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Mirror" type="Sprite3D"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+double_sided = false
+texture = SubResource("ViewportTexture_j1dy2")
+script = ExtResource("1_spk7d")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+keep_aspect = 0
+fov = 40.0
