@@ -33,9 +33,10 @@ func manual_physics_process(delta, original_delta):
 	Signalbus.emit_signal("physics_process", delta, original_delta)
 
 func output(text: String, urgency: urgencies = urgencies.WARNING, do_print: bool = false):
+	var print_timer = str(round(timers.running * 10000) / 10000).pad_decimals(4)
 	if urgency == urgencies.ERROR:
-		print("ERROR | ", timers.running, " | ", text)
+		print("ERROR | ", print_timer, " | ", text)
 	if urgency == urgencies.WARNING and is_printing_warning:
-		print("WARNING | ", timers.running, " | ", text)
+		print("WARNING | ", print_timer, " | ", text)
 	if urgency == urgencies.INFO and is_printing_info and do_print:
-		print("INFO | ", timers.running, " | ", text)
+		print("INFO | ", print_timer, " | ", text)
