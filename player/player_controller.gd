@@ -82,7 +82,6 @@ func manual_physics_process(delta, original_delta):
 	velocity.z = movement_speed * normalized_speed.z
 	if movement_speed <= 4:
 		sprint_toggled = false
-	#TODO air braking
 	velocity.x *= delta / original_delta
 	velocity.z *= delta / original_delta
 	Global.output(str(movement_speed), Global.urgencies.INFO, print_speed)
