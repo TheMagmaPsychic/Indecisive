@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bed03v2s2owil"]
+[gd_scene load_steps=3 format=3 uid="uid://d185w36b0k1he"]
 
 [ext_resource type="Material" uid="uid://cqlktr7j3dv74" path="res://Textures/Prototype.tres" id="2_50d1r"]
 [ext_resource type="Material" uid="uid://btybdp5hrc10t" path="res://Textures/InteractablePrototype.tres" id="2_iublr"]

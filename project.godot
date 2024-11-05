@@ -18,6 +18,19 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Global.gd"
+SignalBus="*res://Signalbus.gd"
+
+[file_customization]
+
+folder_colors={
+"res://character/": "blue",
+"res://levels/": "purple",
+"res://models/": "orange",
+"res://player/": "teal",
+"res://scripted_objects/": "yellow",
+"res://sounds/": "red",
+"res://theme/": "pink"
+}
 
 [input]
 
