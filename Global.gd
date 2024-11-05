@@ -27,10 +27,10 @@ func _physics_process(delta):
 		manual_physics_process(delta * timescale, delta)
 
 func manual_process(delta, original_delta):
-	$"/root/Main/Signal_Bus".emit_signal("process", delta, original_delta)
+	Signalbus.emit_signal("process", delta, original_delta)
 
 func manual_physics_process(delta, original_delta):
-	$"/root/Main/Signal_Bus".emit_signal("physics_process", delta, original_delta)
+	Signalbus.emit_signal("physics_process", delta, original_delta)
 
 func output(text: String, urgency: urgencies = urgencies.WARNING, do_print: bool = false):
 	if urgency == urgencies.ERROR:

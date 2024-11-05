@@ -22,8 +22,8 @@ var sprint_toggled:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready(): #capture mouse, connect manual processes to the signal bus
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	$"/root/Main/Signal_Bus".connect("physics_process", manual_physics_process)
-	$"/root/Main/Signal_Bus".connect("process", manual_process)
+	Signalbus.connect("physics_process", manual_physics_process)
+	Signalbus.connect("process", manual_process)
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: #I just pulled this from some tutorial
