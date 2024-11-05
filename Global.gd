@@ -5,7 +5,7 @@ var timers = {
 }
 var timescale : float = 1.0
 var is_printing_warning:bool = false
-var is_printing_info:bool = false
+var is_printing_info:bool = true
 enum urgencies {
 	ERROR,
 	WARNING,
@@ -37,5 +37,5 @@ func output(text: String, urgency: urgencies = urgencies.WARNING, do_print: bool
 		print("ERROR | ", timers.running, " | ", text)
 	if urgency == urgencies.WARNING and is_printing_warning:
 		print("WARNING | ", timers.running, " | ", text)
-	if urgency == urgencies.WARNING and is_printing_info and do_print:
+	if urgency == urgencies.INFO and is_printing_info and do_print:
 		print("INFO | ", timers.running, " | ", text)
