@@ -13,7 +13,9 @@ enum urgencies {
 }
 
 func _process(delta):
-	timers.running += delta
+	for key in timers.keys(): #advance timers
+		timers[key] += delta
+
 	for repititions in range(floor(timescale)):
 		manual_process(delta, delta)
 	if timescale - floor(timescale) != 0:
