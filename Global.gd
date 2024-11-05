@@ -1,16 +1,7 @@
 extends Node
 
-var timers = {
-	running = 0
-}
+var timers = {}
 var timescale : float = 1.0
-var is_printing_warning:bool = false
-var is_printing_info:bool = true
-enum urgencies {
-	ERROR,
-	WARNING,
-	INFO
-}
 
 func _process(delta):
 	for key in timers.keys(): #advance timers
@@ -29,7 +20,7 @@ func _physics_process(delta):
 		manual_physics_process(delta * timescale, delta)
 
 func manual_process(delta, original_delta):
-	Signalbus.emit_signal("process", delta, original_delta)
+	$"/root/Main/Signal_Bus".emit_signal("process", delta, original_delta)
 
 func manual_physics_process(delta, original_delta):
 	Signalbus.emit_signal("physics_process", delta, original_delta)
