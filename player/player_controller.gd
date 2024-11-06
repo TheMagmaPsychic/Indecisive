@@ -44,8 +44,8 @@ func _ready(): #capture mouse, connect manual processes to the signal bus
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: #I just pulled this from some tutorial
 		rotate_y(-event.relative.x * mouse_sensitivity)
-		$Camera3D.rotate_x(event.relative.y * mouse_sensitivity)
-		$Camera3D.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
+		$Camera.rotate_x(event.relative.y * mouse_sensitivity)
+		$Camera.rotation.x = clampf($Camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if event.is_action_pressed("ui_accept"):
@@ -65,12 +65,16 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 	var look_input = Input.get_vector("Look Left", "Look Right", "Look Down", "Look Up", 0.2)
 	if look_input != Vector2(0,0):
 		rotate_y(-look_input.x * joystick_sensitivity.x)
-		$Camera3D.rotate_x(-look_input.y * joystick_sensitivity.y)
-		$Camera3D.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
+		$Camera.rotate_x(-look_input.y * joystick_sensitivity.y)
+		$Camera.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 	input = Input.get_vector("Move Left", "Move Right", "Move Forward", "Move Backward", 0.2)
 	is_sprinting = Input.is_action_pressed("Sprint") or sprint_toggled
 	if current_locomotion != locomotion.LADDER:
 		velocity.y += -gravity * delta
+	
+	if $Camera/Pointer.is_colliding():
+		if $Camera/Pointer.get_collider().is_in_group("NPCs"):
+			$Camera/Pointer.get_collider().talk_to()
 
 func ground_move():
 	velocity.x += movement_dir.x * speed * -1
@@ -144,6 +148,9 @@ func get_friction():
 	var floors: Array = $FloorCollider.get_overlapping_bodies()
 	var most_friction: float = 1
 	floors.erase(self)
+	for x in floors:
+		if x.physics_material_override == null:
+			floors.erase(x)
 	match len(floors):
 		0:
 			Global.output("Friction defaulting to 0.6 (No floor found)", Global.urgencies.WARNING, print_friction)
