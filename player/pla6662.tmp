@@ -15,7 +15,7 @@ material = SubResource("StandardMaterial3D_dml2n")
 height = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1tqc4"]
-size = Vector3(0.7, 1.8, 0.4)
+size = Vector3(0.7, 1.8, 0.22)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_m7voo")
@@ -41,29 +41,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCollider"]
 shape = SubResource("CapsuleShape3D_0hghi")
 
-[node name="Ladder Collider2" type="Area3D" parent="."]
+[node name="Ladder Collider" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19061, 0.600179)
-visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder Collider2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.227028, -0.150474)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.227028, -0.108401)
 shape = SubResource("BoxShape3D_1tqc4")
-
-[node name="Ladder ColliderL" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29107, 0.36315)
-target_position = Vector3(0.5, 0, 0.2)
-collision_mask = 2
-hit_from_inside = true
-
-[node name="Ladder ColliderR" type="RayCast3D" parent="Ladder ColliderL"]
-target_position = Vector3(-0.5, 0, 0.2)
-collision_mask = 2
-hit_from_inside = true
-
-[node name="Ladder ColliderD" type="RayCast3D" parent="Ladder ColliderL"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.682263, 0)
-target_position = Vector3(0, -0.3, 0.2)
-collision_mask = 2
-hit_from_inside = true
