@@ -10,14 +10,16 @@ var joystick_sensitivity: Dictionary = {
 }
 var sprint_multiplier: float = 1.6 #Value multiplied to the speed when running forward.
 var print_velocity: bool = false
-var print_speed: bool = true
+var print_speed: bool = false
 var print_friction: bool = false
 var print_input:bool = false
+var print_position:bool = true
 
 var input:Vector2 = Vector2(0, 0)
 var movement_dir:Vector3 = Vector3(0, 0, 0)
 var is_sprinting:bool = false #is player sprinting
 var sprint_toggled:bool = false
+var is_on_ladder:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): #capture mouse, connect manual processes to the signal bus
@@ -34,8 +36,8 @@ func _input(event):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if event.is_action_pressed("ui_accept"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	if event.is_action_pressed("teleport up"):
-		position.y += 100
+	if event.is_action_pressed("b button"):
+		position = Vector3(0,0,0)
 	if event.is_action_pressed("speed up"):
 		Global.timescale += 0.1
 	if event.is_action_pressed("slow down"):
@@ -53,7 +55,8 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 		$Camera3D.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 	input = Input.get_vector("Move Left", "Move Right", "Move Forward", "Move Backward", 0.2)
 	is_sprinting = Input.is_action_pressed("Sprint") or sprint_toggled
-	velocity.y += -gravity * delta
+	if !is_on_ladder:
+		velocity.y += -gravity * delta
 
 func manual_physics_process(delta, original_delta):
 	if is_sprinting and input.y < 0: #if shift and w are being held, sprint only in the direction you're looking
@@ -85,6 +88,7 @@ func manual_physics_process(delta, original_delta):
 	velocity.x *= delta / original_delta
 	velocity.z *= delta / original_delta
 	Global.output(str(movement_speed), Global.urgencies.INFO, print_speed)
+	Global.output(str(position), Global.urgencies.INFO, print_position)
 	move_and_slide()
 
 func get_friction():
@@ -110,4 +114,7 @@ func jump():
 	velocity.y = 5
 
 func manual_process(_delta, _original_delta):
+	pass
+
+func _process(_delta):
 	pass
