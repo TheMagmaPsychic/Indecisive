@@ -51,7 +51,7 @@ func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event.is_action_pressed("b button"):
-		position = Vector3(0,0,0)
+		$Camera.current = !$Camera.current
 	if event.is_action_pressed("speed up"):
 		Global.timescale += 0.1
 	if event.is_action_pressed("slow down"):
@@ -69,19 +69,25 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 		$Camera.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 	input = Input.get_vector("Move Left", "Move Right", "Move Forward", "Move Backward", 0.2)
 	is_sprinting = Input.is_action_pressed("Sprint") or sprint_toggled
-	if current_locomotion != locomotion.LADDER:
-		velocity.y += -gravity * delta
 	
 	if $Camera/Pointer.is_colliding():
-		if $Camera/Pointer.get_collider().is_in_group("NPCs"):
-			$Camera/Pointer.get_collider().talk_to()
+		var collider: Node3D = $Camera/Pointer.get_collider()
+		if collider.position.distance_to(position) < 4 and collider.is_in_group("Interactables"):
+			$"/root/Main/UI/Info".text = collider.hover_text
+			if Input.is_action_just_pressed("Interact"):
+				$"/root/Main/UI/Info".text = ""
+				$Camera/Pointer.get_collider().interact()
+		else:
+			$"/root/Main/UI/Info".text = ""
+	else:
+		$"/root/Main/UI/Info".text = ""
 
 func ground_move():
 	velocity.x += movement_dir.x * speed * -1
 	velocity.z += movement_dir.z * speed * -1
-	if Input.is_action_just_pressed("Jump"):
+	if Input.is_action_just_pressed("Jump"): #can only jump on the ground
 		jump()
-	var friction = get_friction()
+	var friction = get_friction() #friction on the ground, only way the player slows down
 	velocity.x *= friction
 	velocity.z *= friction
 
@@ -99,7 +105,11 @@ func ladder_move():
 		if abs(rad_to_deg(input.angle()) + 90) < 35:
 			velocity.y += speed / 3
 		elif abs(rad_to_deg(input.angle()) - 90) < 35:
-			velocity.y -= speed / 3
+			if is_on_floor():
+				velocity.x += movement_dir.x * speed * -0.2
+				velocity.z += movement_dir.z * speed * -0.2
+			else:
+				velocity.y -= speed / 3
 	if !$"Ladder ColliderL".is_colliding() and !$"Ladder ColliderL/Ladder ColliderR".is_colliding() and $"Ladder ColliderL/Ladder ColliderD".is_colliding():
 		velocity.x += movement_dir.x * speed * -0.2
 		velocity.z += movement_dir.z * speed * -0.2
@@ -110,6 +120,8 @@ func ladder_move():
 	velocity.y *= 0.7
 
 func manual_physics_process(delta, original_delta):
+	if current_locomotion != locomotion.LADDER:
+		velocity.y += -gravity * delta
 	if is_sprinting and input.y < 0.3: #if shift and w are being held, sprint only in the direction you're looking
 		movement_dir = transform.basis * Vector3(input.x, 0, input.y * sprint_multiplier)
 	else:
@@ -149,7 +161,9 @@ func get_friction():
 	var most_friction: float = 1
 	floors.erase(self)
 	for x in floors:
-		if x.physics_material_override == null:
+		if x is CSGShape3D:
+			return(0.6)
+		elif x.physics_material_override == null:
 			floors.erase(x)
 	match len(floors):
 		0:
@@ -167,7 +181,7 @@ func get_friction():
 	return(most_friction)
 
 func jump():
-	velocity.y = 5
+	velocity.y = 8
 
 func manual_process(_delta, _original_delta):
 	pass

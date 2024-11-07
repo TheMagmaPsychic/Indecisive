@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dicw50ynb4xvu"]
+[gd_scene load_steps=19 format=3 uid="uid://dicw50ynb4xvu"]
 
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="1_1hf63"]
 [ext_resource type="Texture2D" uid="uid://d2yxkvn5v3ofg" path="res://models/Bricks_2 - Copy.png" id="2_34yif"]
 [ext_resource type="PackedScene" uid="uid://u5ar3y50dajx" path="res://character/NPC.tscn" id="2_dpjhj"]
-[ext_resource type="Script" path="res://character/Jimmy.gd" id="3_tke14"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_psdyy"]
 friction = 0.6
@@ -28,7 +27,7 @@ uv1_scale = Vector3(100, 100, 100)
 material = SubResource("StandardMaterial3D_8xsxt")
 size = Vector3(100, 0.1, 100)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sing3"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q7fmy"]
 data = PackedVector3Array(-50, 0.05, 50, 50, 0.05, 50, -50, -0.05, 50, 50, 0.05, 50, 50, -0.05, 50, -50, -0.05, 50, 50, 0.05, -50, -50, 0.05, -50, 50, -0.05, -50, -50, 0.05, -50, -50, -0.05, -50, 50, -0.05, -50, 50, 0.05, 50, 50, 0.05, -50, 50, -0.05, 50, 50, 0.05, -50, 50, -0.05, -50, 50, -0.05, 50, -50, 0.05, -50, -50, 0.05, 50, -50, -0.05, -50, -50, 0.05, 50, -50, -0.05, 50, -50, -0.05, -50, 50, 0.05, 50, -50, 0.05, 50, 50, 0.05, -50, -50, 0.05, 50, -50, 0.05, -50, 50, 0.05, -50, -50, -0.05, 50, 50, -0.05, 50, -50, -0.05, -50, 50, -0.05, 50, 50, -0.05, -50, -50, -0.05, -50)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_crqe6"]
@@ -117,10 +116,10 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level 1/MeshInstance3D4"]
 transform = Transform3D(1, 0, 0, 0, -4.37118e-08, 1, 0, -1, -4.37118e-08, 0, 0, 0)
-shape = SubResource("ConcavePolygonShape3D_sing3")
+shape = SubResource("ConcavePolygonShape3D_q7fmy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level 1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.162504, -4.83568)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.58698, 0.840203, -8.31707)
 physics_material_override = SubResource("PhysicsMaterial_crqe6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level 1/StaticBody3D"]
@@ -142,9 +141,19 @@ mesh = SubResource("BoxMesh_7cknc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.42104, 3.59548, 1.26285)
 shape = SubResource("ConcavePolygonShape3D_1s17u")
 
-[node name="Node3D" parent="Level 1" instance=ExtResource("2_dpjhj")]
+[node name="JIMMY" parent="Level 1" instance=ExtResource("2_dpjhj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29913, 0, 2.90839)
-script = ExtResource("3_tke14")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level 1"]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level 1/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.8538, 2.0224, -1.89889)
+size = Vector3(10, 0.51709, 14.1108)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level 1/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.2494, 2.65342, -4.04798)
+size = Vector3(10, 0.51709, 14.1108)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -171,11 +180,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3jd8e")
 
-[node name="Label" type="Label" parent="UI"]
+[node name="Timer" type="Label" parent="UI"]
 layout_mode = 0
 offset_left = 127.0
 offset_top = 149.0
 offset_right = 316.0
 offset_bottom = 172.0
 
+[node name="Info" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.6
+anchor_right = 0.5
+anchor_bottom = 0.6
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Player" parent="." instance=ExtResource("1_1hf63")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.622433, 0, 0.782673, 0, 1, 0, -0.782673, 0, -0.622433, 4.23144, 1.84198, 0)

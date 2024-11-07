@@ -33,7 +33,7 @@ func _physics_process(delta):
 		manual_physics_process(delta * timescale, delta)
 
 func manual_process(delta, original_delta):
-	$/root/Main/UI/Label.text = str(timers.subjective.dilation)
+	$/root/Main/UI/Timer.text = str(timers.subjective.dilation)
 	for key in timers.subjective.keys():
 		timers.subjective[key] += delta
 	Signalbus.emit_signal("process", delta, original_delta)
