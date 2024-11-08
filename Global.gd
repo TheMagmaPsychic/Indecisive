@@ -1,7 +1,12 @@
 extends Node
 
 var timers = {
-	running = 0
+	objective = {
+		running = 0
+	},
+	subjective = {
+		dilation = 0
+	}
 }
 var timescale : float = 1.0
 var is_printing_warning:bool = false
@@ -13,9 +18,8 @@ enum urgencies {
 }
 
 func _process(delta):
-	for key in timers.keys(): #advance timers
-		timers[key] += delta
-
+	for key in timers.objective.keys(): #advance timers
+		timers.objective[key] += delta
 	for repititions in range(floor(timescale)):
 		manual_process(delta, delta)
 	if timescale - floor(timescale) != 0:
@@ -29,13 +33,16 @@ func _physics_process(delta):
 		manual_physics_process(delta * timescale, delta)
 
 func manual_process(delta, original_delta):
+	$/root/Main/UI/Timer.text = str(timers.subjective.dilation)
+	for key in timers.subjective.keys():
+		timers.subjective[key] += delta
 	SignalBus.emit_signal("process", delta, original_delta)
 
 func manual_physics_process(delta, original_delta):
 	SignalBus.emit_signal("physics_process", delta, original_delta)
 
 func output(text: String, urgency: urgencies = urgencies.WARNING, do_print: bool = false):
-	var print_timer = str(round(timers.running * 10000) / 10000).pad_decimals(4)
+	var print_timer = str(round(timers.objective.running * 10000) / 10000).pad_decimals(4)
 	if urgency == urgencies.ERROR:
 		print("ERROR | ", print_timer, " | ", text)
 	if urgency == urgencies.WARNING and is_printing_warning:

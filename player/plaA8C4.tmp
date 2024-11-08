@@ -2,12 +2,8 @@
 
 [ext_resource type="Script" path="res://player/player_controller.gd" id="1_m7voo"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_uou7g"]
-top_radius = 0.01
-bottom_radius = 0.01
-height = 5.0
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ucxy"]
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dml2n"]
 albedo_color = Color(0.423529, 0.882353, 0.929412, 1)
@@ -18,19 +14,18 @@ material = SubResource("StandardMaterial3D_dml2n")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0hghi"]
 height = 1.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1tqc4"]
+size = Vector3(0.7, 1.8, 0.22)
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_m7voo")
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.6, 0)
+current = true
 
-[node name="Pointer" type="RayCast3D" parent="Camera"]
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -10)
-
-[node name="PointerVisualizer" type="MeshInstance3D" parent="Camera/Pointer"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.58121e-07, 0, -2.95256)
-visible = false
-mesh = SubResource("CylinderMesh_uou7g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -41,24 +36,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_glgwu")
 
 [node name="FloorCollider" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.374258, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FloorCollider"]
 shape = SubResource("CapsuleShape3D_0hghi")
 
-[node name="Ladder ColliderL" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29107, 0.36315)
-target_position = Vector3(0.5, 0, 0.2)
+[node name="Ladder Collider" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19061, 0.600179)
+collision_layer = 0
 collision_mask = 2
-hit_from_inside = true
 
-[node name="Ladder ColliderR" type="RayCast3D" parent="Ladder ColliderL"]
-target_position = Vector3(-0.5, 0, 0.2)
-collision_mask = 2
-hit_from_inside = true
-
-[node name="Ladder ColliderD" type="RayCast3D" parent="Ladder ColliderL"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.682263, 0)
-target_position = Vector3(0, -0.3, 0.2)
-collision_mask = 2
-hit_from_inside = true
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder Collider"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.227028, -0.108401)
+shape = SubResource("BoxShape3D_1tqc4")
