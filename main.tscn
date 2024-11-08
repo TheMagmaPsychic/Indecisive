@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://u5ar3y50dajx" path="res://character/NPC.tscn" id="2_dpjhj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_psdyy"]
+friction = 0.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_stay0"]
 size = Vector3(10, 0.1, 10)
@@ -65,16 +66,10 @@ corner_radius_bottom_left = 20
 
 [node name="Level 1" type="Node3D" parent="."]
 
-[node name="Player" type="CharacterBody3D" parent="Level 1"]
-script = ExtResource("1_iho5l")
-
-[node name="Camera3D" type="Camera3D" parent="Level 1/Player"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.6, 0)
-current = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Level 1/Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_7ucxy")
+[node name="OmniLight3D" type="DirectionalLight3D" parent="Level 1"]
+transform = Transform3D(0.887317, 0.411745, 0.20769, 0.0332287, -0.506277, 0.861731, 0.459962, -0.757727, -0.46291, 3.61129, 28.5344, -51.1462)
+light_angular_distance = 6.36
+directional_shadow_split_2 = 0.533
 
 [node name="MeshInstance3D" type="StaticBody3D" parent="Level 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3996, 2.62408, 5.30162)
@@ -85,6 +80,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -4.
 shape = SubResource("BoxShape3D_stay0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level 1/MeshInstance3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.45614)
 mesh = SubResource("BoxMesh_vh1c6")
 
 [node name="MeshInstance3D2" type="StaticBody3D" parent="Level 1"]
@@ -110,11 +106,11 @@ shape = SubResource("BoxShape3D_17k5v")
 mesh = SubResource("BoxMesh_vh1c6")
 
 [node name="MeshInstance3D4" type="StaticBody3D" parent="Level 1"]
-transform = Transform3D(0.999999, 0, 0, 0, -4.37114e-08, -0.999999, 0, 1, -4.37114e-08, 0, -1.04943, 0)
+transform = Transform3D(0.999999, 0, 0, 0, -4.37114e-08, -0.999999, 0, 1, -4.37114e-08, 0, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_psdyy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level 1/MeshInstance3D4"]
-transform = Transform3D(1, 0, 0, 0, -4.37118e-08, 1, 0, -1, -4.37118e-08, 0, -4.58721e-08, -1.04943)
+transform = Transform3D(1, 0, 0, 0, -4.37118e-08, 1, 0, -1, -4.37118e-08, 0, 0, 0)
 mesh = SubResource("BoxMesh_1rpjc")
 skeleton = NodePath("")
 

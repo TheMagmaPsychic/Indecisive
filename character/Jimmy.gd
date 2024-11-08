@@ -29,7 +29,7 @@ func _process(_delta):
 	pass
 
 func interact():
-	Signalbus.emit_signal("talk_to_npc")
+	SignalBus.emit_signal("talk_to_npc")
 	choose_dialogue()
 	times_interacted += 1
 
