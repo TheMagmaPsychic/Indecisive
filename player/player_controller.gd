@@ -20,6 +20,10 @@ var input:Vector2 = Vector2(0, 0)
 var movement_dir:Vector3 = Vector3(0, 0, 0)
 var is_sprinting:bool = false #is player sprinting
 var sprint_toggled:bool = false
+var is_jumping:bool = false
+
+var max_coyote:float = 0.2
+var coyote_time:float = 0
 
 var movement_speed: float = 0
 var normalized_speed: Vector3 = Vector3(0,0,0)
@@ -70,6 +74,11 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 	input = Input.get_vector("Move Left", "Move Right", "Move Forward", "Move Backward", 0.2)
 	is_sprinting = Input.is_action_pressed("Sprint") or sprint_toggled
 	
+	if !is_on_floor() and current_locomotion != locomotion.LADDER:
+		continue_jump(delta)
+	elif current_locomotion != locomotion.LADDER:
+		is_jumping = false
+	
 	if $Camera/Pointer.is_colliding():
 		var collider: Node3D = $Camera/Pointer.get_collider()
 		if collider.position.distance_to(position) < 4 and collider.is_in_group("Interactables"):
@@ -85,15 +94,16 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 func ground_move():
 	velocity.x += movement_dir.x * speed * -1
 	velocity.z += movement_dir.z * speed * -1
-	if Input.is_action_just_pressed("Jump"): #can only jump on the ground
-		jump()
 	var friction = get_friction() #friction on the ground, only way the player slows down
 	velocity.x *= friction
 	velocity.z *= friction
 
 func air_move():
 	var new_norm = normalized_speed
-	if normalized_speed != Vector3(0, 0, 0) and movement_dir_normal != Vector3(0, 0, 0) and abs(rad_to_deg(difference)) > 120:
+	#BUG jumping and then moving will retain the direction of the previous move
+	if movement_speed < 2 and movement_dir_normal != Vector3(0, 0, 0):
+		movement_speed += 0.1
+	if normalized_speed != Vector3(0, 0, 0) and movement_dir_normal != Vector3(0, 0, 0) and abs(rad_to_deg(difference)) > 120 and abs(rad_to_deg(difference)) < 200:
 		movement_speed *= 0.97
 	else:
 		new_norm = (normalized_speed + -0.05 * movement_dir).normalized()
@@ -120,8 +130,6 @@ func ladder_move():
 	velocity.y *= 0.7
 
 func manual_physics_process(delta, original_delta):
-	if current_locomotion != locomotion.LADDER:
-		velocity.y += -gravity * delta
 	if is_sprinting and input.y < 0.3: #if shift and w are being held, sprint only in the direction you're looking
 		movement_dir = transform.basis * Vector3(input.x, 0, input.y * sprint_multiplier)
 	else:
@@ -136,9 +144,14 @@ func manual_physics_process(delta, original_delta):
 	if is_on_ladder: #check for movement type
 		current_locomotion = locomotion.LADDER
 	elif is_on_floor():
+		coyote_time = 0
 		current_locomotion = locomotion.GROUND
 	else:
+		coyote_time += delta
 		current_locomotion = locomotion.AIR
+	if !is_on_ladder and Input.is_action_just_pressed("Jump") and coyote_time < max_coyote:
+		jump()
+		is_jumping = true
 	match current_locomotion: #move according to movement type
 		locomotion.LADDER:
 			ladder_move()
@@ -181,7 +194,25 @@ func get_friction():
 	return(most_friction)
 
 func jump():
+	if normalized_speed == Vector3(0, 0, 0):
+		movement_dir = Vector3(0, 0, 0)
+	coyote_time += 10000
 	velocity.y = 8
+
+func continue_jump(delta):
+	var gravity_effect = 1
+	if velocity.y < 0: #if falling
+		gravity_effect *= 1.8
+	if is_jumping:
+		if Input.is_action_pressed("Jump"):
+			pass
+		else:
+			gravity_effect *= 1.8
+			is_jumping = false
+	else:
+		gravity_effect *= 1.8
+	velocity.y -= delta * gravity_effect * gravity
+	
 
 func manual_process(_delta, _original_delta):
 	pass
