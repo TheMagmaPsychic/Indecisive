@@ -18,6 +18,11 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 Global="*res://Global.gd"
 Signalbus="*res://Signalbus.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [file_customization]
 
