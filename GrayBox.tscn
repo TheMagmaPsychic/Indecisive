@@ -6,98 +6,55 @@
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00462532, 0)
 
-[node name="EastHall" type="CSGCombiner3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0647, 0, 0)
+[node name="Basement" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -12, -78.9018)
 
-[node name="EastHallFloor" type="CSGBox3D" parent="EastHall"]
-size = Vector3(4, 1, 20)
+[node name="BasementFloor" type="CSGBox3D" parent="Basement"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, -14.03)
+size = Vector3(36, 4.96338, 21)
 material = ExtResource("2_50d1r")
 
-[node name="EastHallRoomA&B" type="CSGBox3D" parent="EastHall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2, 3)
-size = Vector3(7, 5, 14)
-material = ExtResource("2_50d1r")
-
-[node name="EastHallRoomSubA" type="CSGBox3D" parent="EastHall/EastHallRoomA&B"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3.1323)
+[node name="BasementSub" type="CSGBox3D" parent="Basement"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.7278, 3, -14.5564)
 operation = 2
-size = Vector3(7, 5, 5)
+size = Vector3(35, 4.96338, 19.5927)
 material = ExtResource("2_50d1r")
 
-[node name="EastHallRoomSubB" type="CSGBox3D" parent="EastHall/EastHallRoomA&B"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3.02308)
-operation = 2
-size = Vector3(7, 5, 5)
-material = ExtResource("2_50d1r")
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Basement"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.2029, 2.00332, -19.2068)
 
-[node name="EastHallRoomA&B2" type="CSGBox3D" parent="EastHall"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.5, 2, 3)
-size = Vector3(7, 5, 14)
-material = ExtResource("2_50d1r")
-
-[node name="EastHallRoomSubA" type="CSGBox3D" parent="EastHall/EastHallRoomA&B2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3.1323)
-operation = 2
-size = Vector3(7, 5, 5)
-material = ExtResource("2_50d1r")
-
-[node name="EastHallRoomSubB" type="CSGBox3D" parent="EastHall/EastHallRoomA&B2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3.02308)
-operation = 2
-size = Vector3(7, 5, 5)
-material = ExtResource("2_50d1r")
-
-[node name="EastHallWall" type="CSGBox3D" parent="EastHall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 9.48001)
-size = Vector3(5, 5, 1)
-material = ExtResource("2_50d1r")
-
-[node name="LivingRoom" type="CSGCombiner3D" parent="."]
-
-[node name="LivingRoomFloor" type="CSGBox3D" parent="LivingRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -14.03)
-size = Vector3(46, 4.96338, 21)
-material = ExtResource("2_50d1r")
-
-[node name="LivingRoomSub" type="CSGBox3D" parent="LivingRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.912, 3, -14.5564)
-operation = 2
-size = Vector3(44.6316, 4.96338, 19.5927)
-material = ExtResource("2_50d1r")
-
-[node name="LivingRoomDoorSub" type="CSGBox3D" parent="LivingRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5673, 3, -4.47427)
-operation = 2
-size = Vector3(3.7514, 4.96338, 2.43588)
-material = ExtResource("2_50d1r")
-
-[node name="LivingRoomFrontDoor" type="CSGBox3D" parent="LivingRoom"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.3139, 3, -14.9817)
-size = Vector3(3.7514, 4.96338, 2.43588)
+[node name="WineRack" type="CSGBox3D" parent="Basement/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2.38419e-07)
+size = Vector3(0.467896, 3, 11)
 material = ExtResource("2_iublr")
 
-[node name="SpiceRack1" type="CSGBox3D" parent="LivingRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.1995, 3.31084, -19.9604)
-size = Vector3(0.467896, 1, 2)
+[node name="WineRack2" type="CSGBox3D" parent="Basement/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
+size = Vector3(0.467896, 3, 11)
 material = ExtResource("2_iublr")
 
-[node name="SpiceRack2" type="CSGBox3D" parent="LivingRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.1995, 3.31294, -10.2108)
-size = Vector3(0.467896, 1, 2)
+[node name="WineRack3" type="CSGBox3D" parent="Basement/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -14.8579)
+size = Vector3(0.467896, 3, 11)
 material = ExtResource("2_iublr")
 
-[node name="Fireplace" type="CSGBox3D" parent="LivingRoom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8795, 1.7907, -14.8087)
-size = Vector3(1.68311, 3, 5)
+[node name="WineRack4" type="CSGBox3D" parent="Basement/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -14.858)
+size = Vector3(0.467896, 3, 11)
+material = ExtResource("2_iublr")
+
+[node name="Chest" type="CSGBox3D" parent="Basement"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7527, 1.01173, -22.5244)
+size = Vector3(3.48157, 1, 2)
+material = ExtResource("2_iublr")
+
+[node name="StairsToBasement" type="CSGBox3D" parent="Basement"]
+transform = Transform3D(-3.78552e-08, -0.5, -0.866025, -2.18557e-08, 0.866025, -0.5, 1, 0, -4.37114e-08, 21.5782, 4.01922, -21.4656)
+size = Vector3(3, 1, 15)
 material = ExtResource("2_50d1r")
-
-[node name="Fireplace_Stove" type="CSGBox3D" parent="LivingRoom/Fireplace"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.613224, -0.321014, 0)
-size = Vector3(1.68311, 2.35797, 3)
-material = ExtResource("2_iublr")
 
 [node name="Inn3DContainer" type="CSGCombiner3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -107.351)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -82.8041)
 
 [node name="Inn" type="CSGBox3D" parent="Inn3DContainer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 14.5, 0)
@@ -163,21 +120,131 @@ transform = Transform3D(1, 1.01545e-09, -7.71342e-09, 1.01549e-09, 0.965927, 0.2
 size = Vector3(17, 1, 4)
 material = ExtResource("2_50d1r")
 
-[node name="Bar" type="CSGCombiner3D" parent="."]
+[node name="Bar" type="CSGCombiner3D" parent="Inn3DContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 107.351)
 
-[node name="LongTable2" type="CSGBox3D" parent="Bar"]
+[node name="LongTable2" type="CSGBox3D" parent="Inn3DContainer/Bar"]
 transform = Transform3D(-5.14248e-08, -5.96046e-08, -1, -1.01549e-09, 1, -5.96046e-08, 1, 2.98023e-08, -4.37114e-08, 5.43722, 2.45631, -92.612)
 size = Vector3(17, 2, 2)
 material = ExtResource("2_50d1r")
 
-[node name="Backrooms" type="CSGBox3D" parent="Bar"]
-transform = Transform3D(-5.14248e-08, -5.96046e-08, -1, -1.01549e-09, 1, -5.96046e-08, 1, 2.98023e-08, -4.37114e-08, 14.7086, 7.95631, -106.612)
-size = Vector3(45, 13, 10)
+[node name="Backrooms" type="CSGBox3D" parent="Inn3DContainer/Bar"]
+transform = Transform3D(-5.14248e-08, -5.96046e-08, -1, -1.01549e-09, 1, -5.96046e-08, 1, 2.98023e-08, -4.37114e-08, 10.2086, 7.95631, -110.923)
+size = Vector3(37, 13, 1)
 material = ExtResource("2_50d1r")
 
-[node name="2ndFloor" type="CSGCombiner3D" parent="."]
+[node name="2ndFloor" type="CSGCombiner3D" parent="Inn3DContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 107.351)
 
-[node name="2ndFloor_Floor" type="CSGBox3D" parent="2ndFloor"]
+[node name="2ndFloor_Floor" type="CSGBox3D" parent="Inn3DContainer/2ndFloor"]
 transform = Transform3D(-5.14248e-08, -5.96046e-08, -1, -1.01549e-09, 1, -5.96046e-08, 1, 2.98023e-08, -4.37114e-08, 6.20859, 14.9563, -106.612)
 size = Vector3(45, 1, 27)
+material = ExtResource("2_50d1r")
+
+[node name="2ndFloorFireplace" type="CSGBox3D" parent="Inn3DContainer/2ndFloor"]
+transform = Transform3D(-5.14248e-08, -5.96046e-08, -1, -1.01549e-09, 1, -5.96046e-08, 1, 2.98023e-08, -4.37114e-08, 3.79174, 15.6327, -106.296)
+size = Vector3(4, 0.5, 5)
+material = ExtResource("2_iublr")
+
+[node name="2ndFloorFireplace2" type="CSGBox3D" parent="Inn3DContainer/2ndFloor"]
+transform = Transform3D(-5.14248e-08, -5.96046e-08, -1, -1.01549e-09, 1, -5.96046e-08, 1, 2.98023e-08, -4.37114e-08, 15.4135, -1.12412, -125.051)
+size = Vector3(3, 6, 3)
+material = ExtResource("2_iublr")
+
+[node name="2ndFloorRail" type="CSGBox3D" parent="Inn3DContainer/2ndFloor"]
+transform = Transform3D(-5.14248e-08, -5.96046e-08, -1, -1.01549e-09, 1, -5.96046e-08, 1, 2.98023e-08, -4.37114e-08, -7.23934, 16.0315, -104.612)
+size = Vector3(41, 1, 0.001)
+material = ExtResource("2_50d1r")
+
+[node name="Westhall" type="CSGCombiner3D" parent="Inn3DContainer/2ndFloor"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10.6032, 14.9918, -119.313)
+
+[node name="WestHallRoomA&B" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/Westhall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2, 3)
+size = Vector3(7, 5, 14)
+material = ExtResource("2_50d1r")
+
+[node name="WestHallRoomSubA" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/Westhall/WestHallRoomA&B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3.1323)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="WestHallRoomSubB" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/Westhall/WestHallRoomA&B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3.02308)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="WestHallRoomA&B2" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/Westhall"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.5, 2, 3)
+size = Vector3(7, 5, 14)
+material = ExtResource("2_50d1r")
+
+[node name="WestHallRoomSubA" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/Westhall/WestHallRoomA&B2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3.1323)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="WestHallRoomSubB" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/Westhall/WestHallRoomA&B2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3.02308)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="CenterRooms" type="CSGCombiner3D" parent="Inn3DContainer/2ndFloor"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 16.1032, 16.9918, -106.745)
+
+[node name="CenterRooms" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/CenterRooms"]
+size = Vector3(7, 5, 14)
+material = ExtResource("2_50d1r")
+
+[node name="CenterRoomSubA" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/CenterRooms/CenterRooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3.1323)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="CenterRoomSubB" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/CenterRooms/CenterRooms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3.02308)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="EastHall" type="CSGCombiner3D" parent="Inn3DContainer/2ndFloor"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 10.6032, 14.9918, -94.3128)
+
+[node name="EastHallRoomA&B" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/EastHall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2, 3)
+size = Vector3(7, 5, 14)
+material = ExtResource("2_50d1r")
+
+[node name="EastHallRoomSubA" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/EastHall/EastHallRoomA&B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3.1323)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="EastHallRoomSubB" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/EastHall/EastHallRoomA&B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3.02308)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="EastHallRoomA&B2" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/EastHall"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.5, 2, 3)
+size = Vector3(7, 5, 14)
+material = ExtResource("2_50d1r")
+
+[node name="EastHallRoomSubA" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/EastHall/EastHallRoomA&B2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3.1323)
+operation = 2
+size = Vector3(7, 5, 5)
+material = ExtResource("2_50d1r")
+
+[node name="EastHallRoomSubB" type="CSGBox3D" parent="Inn3DContainer/2ndFloor/EastHall/EastHallRoomA&B2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -3.02308)
+operation = 2
+size = Vector3(7, 5, 5)
 material = ExtResource("2_50d1r")
