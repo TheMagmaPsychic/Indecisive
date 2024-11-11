@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://towybnlkqqby"]
+
+[ext_resource type="Script" path="res://scripted_objects/moveable.gd" id="1_th7n1"]
+
+[node name="Moveable" type="RigidBody3D"]
+script = ExtResource("1_th7n1")
+
+[node name="PinJoint3D" type="PinJoint3D" parent="."]
+params/impulse_clamp = 1.0
