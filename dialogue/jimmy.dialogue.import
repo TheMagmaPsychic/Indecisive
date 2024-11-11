@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://d4ctwtn52yj4n"
+path="res://.godot/imported/jimmy.dialogue-6f9f4f185a585c40b41fafb4a04eeccb.tres"
+
+[deps]
+
+source_file="res://dialogue/jimmy.dialogue"
+dest_files=["res://.godot/imported/jimmy.dialogue-6f9f4f185a585c40b41fafb4a04eeccb.tres"]
+
+[params]
+
+defaults=true
