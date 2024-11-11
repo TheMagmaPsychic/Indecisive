@@ -54,3 +54,6 @@ func output(text: String, urgency: urgencies = urgencies.WARNING, do_print: bool
 		print("WARNING | ", print_timer, " | ", text)
 	if urgency == urgencies.INFO and is_printing_info and do_print:
 		print("INFO | ", print_timer, " | ", text)
+
+func give_strange_object():
+	flags.has_strange_object = true
