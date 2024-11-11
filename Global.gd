@@ -16,6 +16,11 @@ enum urgencies {
 	WARNING,
 	INFO
 }
+var flags: Dictionary = {
+	has_killed_bunny = false
+}
+@onready var player = $/root/Main/Player
+@onready var jimmy = $"/root/Main/Level 1/JIMMY"
 
 func _process(delta):
 	for key in timers.objective.keys(): #advance timers
@@ -33,7 +38,7 @@ func _physics_process(delta):
 		manual_physics_process(delta * timescale, delta)
 
 func manual_process(delta, original_delta):
-	$/root/Main/UI/Timer.text = str(timers.subjective.dilation)
+	#$/root/Main/UI/Timer.text = str(timers.subjective.dilation)
 	for key in timers.subjective.keys():
 		timers.subjective[key] += delta
 	SignalBus.emit_signal("process", delta, original_delta)

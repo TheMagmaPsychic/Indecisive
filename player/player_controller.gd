@@ -10,6 +10,7 @@ var joystick_sensitivity: Dictionary = {
 	y = 0.09
 }
 var sprint_multiplier: float = 1.6 #Value multiplied to the speed when running forward.
+var capture_mouse:bool = false
 
 var print_velocity: bool = false
 var print_speed: bool = false
@@ -20,7 +21,14 @@ var print_position:bool = false
 var input:Vector2 = Vector2(0, 0)
 var movement_dir:Vector3 = Vector3(0, 0, 0)
 var is_sprinting:bool = false #is player sprinting
+var was_just_sprinting:bool = false #was player just sprinting
 var sprint_toggled:bool = false
+var is_jumping:bool = false
+var is_standing_jump:bool = false
+var max_air_acceleration:float = 3
+
+var max_coyote:float = 0.2
+var coyote_time:float = 0
 
 var movement_speed: float = 0
 var normalized_speed: Vector3 = Vector3(0,0,0)
@@ -34,11 +42,15 @@ enum locomotion {
 }
 var current_locomotion: locomotion = locomotion.GROUND
 
+
+
 #BUG slows down when not moving forward when facing a direction
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): #capture mouse, connect manual processes to the signal bus
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	SignalBus.connect("talk_to_npc", talk_to_npc)
+	SignalBus.connect("talk_to_npc_stop", stop_talk_to_npc)
 	SignalBus.connect("physics_process", manual_physics_process)
 	SignalBus.connect("process", manual_process)
 
@@ -69,34 +81,50 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 		$Camera.rotate_x(-look_input.y * joystick_sensitivity.y)
 		$Camera.rotation.x = clampf($Camera3D.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 	input = Input.get_vector("Move Left", "Move Right", "Move Forward", "Move Backward", 0.2)
+	was_just_sprinting = is_sprinting
 	is_sprinting = Input.is_action_pressed("Sprint") or sprint_toggled
 	
+	var tween = create_tween()
+	if is_sprinting:
+		tween.tween_property($Camera, "fov", 90, 0.3)
+	else:
+		tween.tween_property($Camera, "fov", 75, 0.3)
+	
+	if !is_on_floor() and current_locomotion != locomotion.LADDER:
+		continue_jump(delta)
+	elif current_locomotion != locomotion.LADDER:
+		is_jumping = false
+	
+	var interactable_ui: String = ""
 	if $Camera/Pointer.is_colliding():
 		var collider: Node3D = $Camera/Pointer.get_collider()
-		if collider.position.distance_to(position) < 4 and collider.is_in_group("Interactables"):
-			$"/root/Main/UI/Info".text = collider.hover_text
+		if collider.position.distance_to(position) < 4 and collider.is_in_group("Interactable"):
+			interactable_ui = collider.hover_text
 			if Input.is_action_just_pressed("Interact"):
-				$"/root/Main/UI/Info".text = ""
 				$Camera/Pointer.get_collider().interact()
-		else:
-			$"/root/Main/UI/Info".text = ""
-	else:
-		$"/root/Main/UI/Info".text = ""
+	SignalBus.update_UI_interact.emit(interactable_ui)
+	
+	
 
 func ground_move():
 	velocity.x += movement_dir.x * speed * -1
 	velocity.z += movement_dir.z * speed * -1
-	if Input.is_action_just_pressed("Jump"): #can only jump on the ground
-		jump()
 	var friction = get_friction() #friction on the ground, only way the player slows down
 	velocity.x *= friction
 	velocity.z *= friction
 
 func air_move():
 	var new_norm = normalized_speed
-	if normalized_speed != Vector3(0, 0, 0) and movement_dir_normal != Vector3(0, 0, 0) and abs(rad_to_deg(difference)) > 120:
+	if is_standing_jump and movement_dir_normal != Vector3(0, 0, 0):
+		movement_speed += 0.1
+		new_norm = -movement_dir
+		if movement_speed >= max_air_acceleration:
+			is_standing_jump = !is_standing_jump
+	if normalized_speed != Vector3(0, 0, 0) and movement_dir_normal != Vector3(0, 0, 0) and abs(rad_to_deg(difference)) > 120 and abs(rad_to_deg(difference)) < 200:
+		#if holding direction reverse of where you're going, slow down
 		movement_speed *= 0.97
-	else:
+	elif !is_standing_jump:
+		#if holding a new direction and was not a standing jump, change direction
 		new_norm = (normalized_speed + -0.05 * movement_dir).normalized()
 	velocity.x = movement_speed * new_norm.x
 	velocity.z = movement_speed * new_norm.z
@@ -121,8 +149,6 @@ func ladder_move():
 	velocity.y *= 0.7
 
 func manual_physics_process(delta, original_delta):
-	if current_locomotion != locomotion.LADDER:
-		velocity.y += -gravity * delta
 	if is_sprinting and input.y < 0.3: #if shift and w are being held, sprint only in the direction you're looking
 		movement_dir = transform.basis * Vector3(input.x, 0, input.y * sprint_multiplier)
 	else:
@@ -137,9 +163,13 @@ func manual_physics_process(delta, original_delta):
 	if is_on_ladder: #check for movement type
 		current_locomotion = locomotion.LADDER
 	elif is_on_floor():
+		coyote_time = 0
 		current_locomotion = locomotion.GROUND
 	else:
+		coyote_time += delta
 		current_locomotion = locomotion.AIR
+	if !is_on_ladder and Input.is_action_just_pressed("Jump") and coyote_time < max_coyote:
+		jump()
 	match current_locomotion: #move according to movement type
 		locomotion.LADDER:
 			ladder_move()
@@ -182,7 +212,40 @@ func get_friction():
 	return(most_friction)
 
 func jump():
+	if movement_speed <= 3:
+		movement_dir = Vector3(0, 0, 0)
+		is_standing_jump = true
+	is_jumping = true
+	coyote_time += 10000
 	velocity.y = 8
+
+func continue_jump(delta):
+	var gravity_effect = 1
+	if velocity.y < 0: #if falling
+		gravity_effect *= 1.5
+	if is_jumping:
+		if Input.is_action_pressed("Jump"):
+			pass
+		else:
+			gravity_effect *= 2.1
+			is_jumping = false
+	else:
+		if is_jumping: #If you've stopped jumping and are moving upward, slow down faster
+			gravity_effect *= 2.1
+		else:
+			gravity_effect *= 3
+		
+	velocity.y -= delta * gravity_effect * gravity
+	velocity.y = clamp(velocity.y, -16, 10)
+	
+func talk_to_npc():
+	capture_mouse = (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func stop_talk_to_npc():
+	if capture_mouse:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
 
 func manual_process(_delta, _original_delta):
 	pass

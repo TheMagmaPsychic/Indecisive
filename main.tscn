@@ -1,8 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://dicw50ynb4xvu"]
+[gd_scene load_steps=21 format=3 uid="uid://dicw50ynb4xvu"]
 
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="1_1hf63"]
 [ext_resource type="Texture2D" uid="uid://d2yxkvn5v3ofg" path="res://models/Bricks_2 - Copy.png" id="2_34yif"]
 [ext_resource type="PackedScene" uid="uid://u5ar3y50dajx" path="res://character/NPC.tscn" id="2_dpjhj"]
+[ext_resource type="Resource" uid="uid://22fk4iejsp7o" path="res://character/Jimmy Dialogue.dialogue" id="3_6eq3k"]
+[ext_resource type="Script" path="res://ui_controller.gd" id="3_brr4k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_psdyy"]
 friction = 0.6
@@ -84,7 +86,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.45614)
 mesh = SubResource("BoxMesh_vh1c6")
 
 [node name="MeshInstance3D2" type="StaticBody3D" parent="Level 1"]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 8.28535, -0.235185, 0)
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 8.28535, 2.17335, 0)
 physics_material_override = SubResource("PhysicsMaterial_psdyy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level 1/MeshInstance3D2"]
@@ -119,7 +121,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37118e-08, 1, 0, -1, -4.37118e-08, 0, 0, 
 shape = SubResource("ConcavePolygonShape3D_q7fmy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level 1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.58698, 0.840203, -8.31707)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.58698, 3.21039, -6.97629)
 physics_material_override = SubResource("PhysicsMaterial_crqe6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Level 1/StaticBody3D"]
@@ -143,6 +145,7 @@ shape = SubResource("ConcavePolygonShape3D_1s17u")
 
 [node name="JIMMY" parent="Level 1" instance=ExtResource("2_dpjhj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29913, 0, 2.90839)
+dialogue_file = ExtResource("3_6eq3k")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level 1"]
 use_collision = true
@@ -164,6 +167,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("3_brr4k")
 
 [node name="Reticle" type="Panel" parent="UI"]
 layout_mode = 1
@@ -200,6 +204,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("1_1hf63")]
 
