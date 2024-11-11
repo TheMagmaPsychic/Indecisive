@@ -1,0 +1,18 @@
+~ unintroduced
+Jimmy: I [[love | like | really like]] bunnies!
+Jimmy: {{self.get_parent()}}
+if Global.flags.has_killed_bunny:
+	Jimmy: So why do you have to kill them? You monster!
+else:
+	Jimmy: Please don't kill any.
+	- Murder all the bunnies!
+		Jimmy: You monster! I hate you!
+	- I'll protect them.
+		Jimmy: Thanks! Do you want this strange object I found over there?
+		- No.
+			Jimmy: Okay, I'll hang on to it.
+		- Yes.
+			Jimmy: Here you go!
+			do Global.give_strange_object()
+do SignalBus.talk_to_npc_stop.emit()
+=> END

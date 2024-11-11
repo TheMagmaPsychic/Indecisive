@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://22fk4iejsp7o"
+path="res://.godot/imported/Jimmy Dialogue.dialogue-7217eb76b15b2115ef0d05256440b31a.tres"
+
+[deps]
+
+source_file="res://character/Jimmy Dialogue.dialogue"
+dest_files=["res://.godot/imported/Jimmy Dialogue.dialogue-7217eb76b15b2115ef0d05256440b31a.tres"]
+
+[params]
+
+defaults=true
