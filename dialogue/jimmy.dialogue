@@ -1,0 +1,12 @@
+~ act1
+Door: its a door.
+- pls open
+	You open the door.
+- stay closed
+	well then why are you here.
+=> nothing_new
+
+~ nothing_new
+% every morning i wake up more tierd then when i went to sleep
+% this inn kinda sucks
+=> END

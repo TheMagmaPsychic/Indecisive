@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 var speed: float = 5 #How much speed to add to velocity, not max speed
