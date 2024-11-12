@@ -42,6 +42,9 @@ enum locomotion {
 }
 var current_locomotion: locomotion = locomotion.GROUND
 
+@onready var pointer = $Camera/Pointer
+@onready var camera = $Camera
+
 
 
 #BUG slows down when not moving forward when facing a direction
@@ -101,7 +104,7 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 		if collider.position.distance_to(position) < 4 and collider.is_in_group("Interactable"):
 			interactable_ui = collider.hover_text
 			if Input.is_action_just_pressed("Interact") and !Global.is_talking_to_npc:
-				$Camera/Pointer.get_collider().interact()
+				$Camera/Pointer.get_collider().interact(self)
 	SignalBus.update_UI_interact.emit(interactable_ui)
 	
 	
@@ -230,9 +233,7 @@ func continue_jump(delta):
 			gravity_effect *= 2.1
 			is_jumping = false
 	else:
-		if is_jumping: #If you've stopped jumping and are moving upward, slow down faster
-			gravity_effect *= 2.1
-		else:
+		if velocity.y > 0: #If you've stopped jumping and are moving upward, slow down faster
 			gravity_effect *= 3
 		
 	velocity.y -= delta * gravity_effect * gravity

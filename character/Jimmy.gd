@@ -5,6 +5,6 @@ extends StaticBody3D
 var hover_text: String = "Talk"
 var times_interacted: int = 0
 
-func interact():
+func interact(player: CharacterBody3D):
 	DialogueManager.show_example_dialogue_balloon(dialogue_file)
 	times_interacted += 1
