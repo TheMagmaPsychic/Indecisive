@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cry4s4kdgkaj7"]
+[gd_scene load_steps=5 format=3 uid="uid://cry4s4kdgkaj7"]
 
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="1_yh6ju"]
-[ext_resource type="PackedScene" uid="uid://towybnlkqqby" path="res://scripted_objects/moveable.tscn" id="2_qaxgj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2bpef"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,13 +14,6 @@ background_mode = 2
 sky = SubResource("Sky_0l4tg")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f02jf"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_vnr1r"]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n6no4"]
-points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
 [node name="Node3D" type="CSGCombiner3D"]
 use_collision = true
@@ -163,18 +155,9 @@ size = Vector3(1.96796, 3.08472, 0.315918)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 28.953, 2.16821, 2.48645)
 size = Vector3(4.59628, 3.41357, 0.315918)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3353, 2.12919, -20.2556)
-size = Vector3(13.3666, 3.4751, 1)
+[node name="bar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.2556)
 
-[node name="Moveable" parent="." node_paths=PackedStringArray("player") groups=["Interactable"] instance=ExtResource("2_qaxgj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.40776, 10)
-disable_mode = 1
-physics_material_override = SubResource("PhysicsMaterial_f02jf")
-player = NodePath("../Player")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Moveable"]
-mesh = SubResource("BoxMesh_vnr1r")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Moveable"]
-shape = SubResource("ConvexPolygonShape3D_n6no4")
+[node name="CSGBox3D" type="CSGBox3D" parent="bar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3353, 0.891638, 0)
+size = Vector3(13.3666, 1, 1)

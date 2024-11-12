@@ -49,10 +49,10 @@ var current_locomotion: locomotion = locomotion.GROUND
 # Called when the node enters the scene tree for the first time.
 func _ready(): #capture mouse, connect manual processes to the signal bus
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	SignalBus.connect("talk_to_npc", talk_to_npc)
-	SignalBus.connect("talk_to_npc_stop", stop_talk_to_npc)
 	SignalBus.connect("physics_process", manual_physics_process)
 	SignalBus.connect("process", manual_process)
+	DialogueManager.dialogue_ended.connect(lock_mouse)
+	DialogueManager.passed_title.connect(unlock_mouse)
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED: #I just pulled this from some tutorial
@@ -100,7 +100,7 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 		var collider: Node3D = $Camera/Pointer.get_collider()
 		if collider.position.distance_to(position) < 4 and collider.is_in_group("Interactable"):
 			interactable_ui = collider.hover_text
-			if Input.is_action_just_pressed("Interact"):
+			if Input.is_action_just_pressed("Interact") and !Global.is_talking_to_npc:
 				$Camera/Pointer.get_collider().interact()
 	SignalBus.update_UI_interact.emit(interactable_ui)
 	
@@ -238,14 +238,13 @@ func continue_jump(delta):
 	velocity.y -= delta * gravity_effect * gravity
 	velocity.y = clamp(velocity.y, -16, 10)
 	
-func talk_to_npc():
+func unlock_mouse(_resource):
 	capture_mouse = (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func stop_talk_to_npc():
+func lock_mouse(_resource):
 	if capture_mouse:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
 
 func manual_process(_delta, _original_delta):
 	pass

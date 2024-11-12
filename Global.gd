@@ -17,10 +17,15 @@ enum urgencies {
 	INFO
 }
 var flags: Dictionary = {
-	has_killed_bunny = false
+	has_killed_bunny = false,
+	jimmy_has_given_strange_object = false,
+	has_strange_object = false
 }
-@onready var player = $/root/Main/Player
-@onready var jimmy = $"/root/Main/Level 1/JIMMY"
+var is_talking_to_npc:bool = false
+
+func _ready():
+	DialogueManager.dialogue_ended.connect(stop_talk_npc)
+	DialogueManager.passed_title.connect(talk_npc)
 
 func _process(delta):
 	for key in timers.objective.keys(): #advance timers
@@ -56,4 +61,11 @@ func output(text: String, urgency: urgencies = urgencies.WARNING, do_print: bool
 		print("INFO | ", print_timer, " | ", text)
 
 func give_strange_object():
+	flags.jimmy_has_given_strange_object = true
 	flags.has_strange_object = true
+
+func talk_npc(_resource):
+	is_talking_to_npc = true
+
+func stop_talk_npc(_resource):
+	is_talking_to_npc = false
