@@ -16,5 +16,4 @@ else:
 			- Yes.
 				Jimmy: Here you go!
 				do Global.give_strange_object()
-do SignalBus.talk_to_npc_stop.emit()
 => END

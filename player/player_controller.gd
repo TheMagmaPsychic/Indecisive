@@ -42,6 +42,7 @@ enum locomotion {
 }
 var current_locomotion: locomotion = locomotion.GROUND
 
+@onready var camera: Camera3D = $Camera
 
 
 #BUG slows down when not moving forward when facing a direction
@@ -191,11 +192,14 @@ func get_friction():
 	var floors: Array = $FloorCollider.get_overlapping_bodies()
 	var most_friction: float = 1
 	floors.erase(self)
+	var to_remove = []
 	for x in floors:
 		if x is CSGShape3D:
 			return(0.6)
 		elif x.physics_material_override == null:
-			floors.erase(x)
+			to_remove.append(x)
+	for mesh in to_remove:
+		floors.erase(mesh)
 	match len(floors):
 		0:
 			Global.output("Friction defaulting to 0.6 (No floor found)", Global.urgencies.WARNING, print_friction)
