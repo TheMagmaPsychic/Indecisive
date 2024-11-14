@@ -31,6 +31,7 @@ func _on_trigger_area_2_body_entered(body: Node3D) -> void:
 		body.is_interactable = false
 		body.freeze = true
 		var tween = create_tween()
+		tween.tween_property(body,"global_position", Vector3(-31,body.global_position.y,0), 0.8)
 		tween.tween_property(body,"global_position:y", 19, 5)\
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_EXPO)
 		await tween.finished
