@@ -1,3 +1,4 @@
+class_name InteractableBody
 extends RigidBody3D
 
 #TODO consider making the marker3D an accessible node of player
@@ -8,6 +9,9 @@ extends RigidBody3D
 @export var snappiness: float = 0.1
 ## How strong the objects movements are
 @export var follow_speed: float = 4
+## Is the object currently able to be picked up or interacted with
+@export var is_interactable = true :
+	set = _set_is_interactable
 
 
 var is_held: bool = false
@@ -15,7 +19,7 @@ var hover_text: String = "Pick up"
 var drag_point: Marker3D
 
 func interact() -> void:
-	if not is_held:
+	if not is_held and is_interactable:
 		is_held = true
 		
 		# create marker as a child of the player at the location of the interacted object
@@ -35,4 +39,13 @@ func _unhandled_input(event: InputEvent) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if is_held:
 		# apply force to object to have it stay near the drag_point
-		state.linear_velocity = state.linear_velocity.lerp((drag_point.global_position - state.transform.origin) * follow_speed, snappiness)
+		var correction_vect = drag_point.global_position - state.transform.origin
+		correction_vect.x *= follow_speed
+		correction_vect.y *= follow_speed/2
+		correction_vect.z *= follow_speed
+		state.linear_velocity = state.linear_velocity.lerp(correction_vect, snappiness)
+
+
+func _set_is_interactable(new_state):
+	is_interactable = new_state
+	is_held = false
