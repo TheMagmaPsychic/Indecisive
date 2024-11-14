@@ -41,7 +41,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		# apply force to object to have it stay near the drag_point
 		var correction_vect = drag_point.global_position - state.transform.origin
 		correction_vect.x *= follow_speed
-		correction_vect.y *= follow_speed/2
+		correction_vect.y *= follow_speed#/2
 		correction_vect.z *= follow_speed
 		state.linear_velocity = state.linear_velocity.lerp(correction_vect, snappiness)
 
