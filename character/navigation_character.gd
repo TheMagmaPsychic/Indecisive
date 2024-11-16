@@ -1,14 +1,15 @@
 extends CharacterBody3D
 
-
+## Assign Marker3D to this to set the character's patrol path. Creating a Node as a child of the character and placing your markers there is recommended for organization
 @export var patrol_points: Array[Marker3D] = []
-
+## WIP nothing for now
 @export var will_pursue_player: bool = false
+## Sets the speed that the entity will move at
+@export var move_speed: float = 6.0
 
 @onready var nav_agent = $NavigationAgent3D
 var is_target_reached: bool = false
 var patrol_point_index: int = 0
-var SPEED := 6.0
 
 
 func _ready() -> void:
@@ -29,7 +30,7 @@ func _physics_process(delta):
 	var next_path_position: Vector3 = nav_agent.get_next_path_position()
 	var direction: Vector3 = global_position.direction_to(next_path_position)
 	look_at(next_path_position)
-	var new_velocity: Vector3 = direction * SPEED
+	var new_velocity: Vector3 = direction * move_speed
 	
 	if not is_on_floor():
 		nav_agent.velocity.y -= 7 * delta
