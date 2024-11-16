@@ -1,57 +1,54 @@
 extends CharacterBody3D
 
+
+@export var patrol_points: Array[Marker3D] = []
+
+@export var will_pursue_player: bool = false
+
 @onready var nav_agent = $NavigationAgent3D
-#TODO remove this and update the player position by calling update_target_location
-@export var player: CharacterBody3D
-
-var should_jump: bool = false
-var next_location: Vector3
+var is_target_reached: bool = false
+var patrol_point_index: int = 0
 var SPEED := 6.0
-var cycles_between_recalc := 50
-var cycles_since_recalc := 1
 
-func _process(delta: float) -> void:
-	if cycles_since_recalc >= cycles_between_recalc:
-		next_location = nav_agent.get_next_path_position()
-		cycles_since_recalc = 0
-	else:
-		cycles_since_recalc += 1
+
+func _ready() -> void:
+	update_target_location()
+
+
+func set_movement_target(movement_target: Vector3):
+	nav_agent.set_target_position(movement_target)
 
 
 func _physics_process(delta):
-	update_target_location(player.global_position)
-	var direction := global_position.direction_to(next_location)
-	nav_agent.velocity.x = direction.x * SPEED
-	nav_agent.velocity.z = direction.z * SPEED
+	# Do not query when the map has never synchronized and is empty.
+	if NavigationServer3D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0:
+		return
+	if nav_agent.is_navigation_finished():
+		return
+
+	var next_path_position: Vector3 = nav_agent.get_next_path_position()
+	var direction: Vector3 = global_position.direction_to(next_path_position)
+	look_at(next_path_position)
+	var new_velocity: Vector3 = direction * SPEED
 	
-	print(is_on_floor())
 	if not is_on_floor():
 		nav_agent.velocity.y -= 7 * delta
-	#elif should_jump:
-	#	nav_agent.velocity.y += 16
-	#	should_jump = false
 	
-	velocity = nav_agent.velocity
-	print(velocity)
-	move_and_slide()
+	nav_agent.set_velocity(new_velocity)
 
-func update_target_location(target_location):
-	nav_agent.target_position = target_location
+
+func update_target_location():
+	nav_agent.call_deferred("set_target_position",patrol_points[patrol_point_index].global_position)
+	if patrol_point_index + 1 >= patrol_points.size():
+		patrol_point_index = 0
+	else:
+		patrol_point_index += 1
+
 
 func _on_navigation_agent_3d_target_reached():
-	print("in range")
+	update_target_location()
 
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = safe_velocity
-	
-
-
-func _on_navigation_agent_3d_link_reached(details: Dictionary) -> void:
-	if is_on_floor():
-		cycles_since_recalc = 0
-		print("jump")
-		var direction := global_position.direction_to(next_location)
-		nav_agent.velocity.y = 7
-		nav_agent.velocity.x = direction.x * SPEED*2
-		nav_agent.velocity.z = direction.z * SPEED*2
+	move_and_slide()

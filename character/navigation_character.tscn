@@ -24,7 +24,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.735239, 0)
 shape = SubResource("ConvexPolygonShape3D_jna3s")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
 radius = 1.0
+use_3d_avoidance = true
 debug_enabled = true
 
 [connection signal="link_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_link_reached"]
