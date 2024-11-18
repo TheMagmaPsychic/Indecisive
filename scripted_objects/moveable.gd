@@ -18,8 +18,12 @@ var is_held: bool = false
 var hover_text: String = "Pick up"
 var drag_point: Marker3D
 
+signal object_interacted_with()
+
+
 func interact() -> void:
 	if not is_held and is_interactable:
+		object_interacted_with.emit()
 		is_held = true
 		
 		# create marker as a child of the player at the location of the interacted object

@@ -6,10 +6,16 @@ extends CharacterBody3D
 @export var will_pursue_player: bool = false
 ## Sets the speed that the entity will move at
 @export var move_speed: float = 6.0
+## Time the character will pause after reaching a patrol point before heading to the next one
+@export var patrol_pause_time: float = 1.0
+
 
 @onready var nav_agent = $NavigationAgent3D
+
 var is_target_reached: bool = false
 var patrol_point_index: int = 0
+var cur_patrol_pause_time: float = 1.1
+var cur_look_direction: Vector3 = Vector3.ZERO
 
 
 func _ready() -> void:
@@ -26,10 +32,13 @@ func _physics_process(delta):
 		return
 	if nav_agent.is_navigation_finished():
 		return
+	if patrol_pause_time >= cur_patrol_pause_time:
+		cur_patrol_pause_time += delta
+		return
 
 	var next_path_position: Vector3 = nav_agent.get_next_path_position()
 	var direction: Vector3 = global_position.direction_to(next_path_position)
-	look_at(next_path_position)
+	#look_at(direction + global_position)
 	var new_velocity: Vector3 = direction * move_speed
 	
 	if not is_on_floor():
@@ -47,9 +56,13 @@ func update_target_location():
 
 
 func _on_navigation_agent_3d_target_reached():
+	cur_patrol_pause_time = 0.0
 	update_target_location()
 
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
-	velocity = safe_velocity
+	velocity = velocity.move_toward(safe_velocity, 0.25)
+	if velocity + global_position != cur_look_direction:
+		look_at(velocity + global_position)
+		cur_look_direction = velocity + global_position
 	move_and_slide()
