@@ -9,7 +9,7 @@ extends Node3D
 @onready var dream_area : Area3D = $DreamArea
 
 # Reference to the player controller (if it's attached to the player node)
-@onready var player_controller : KinematicBody3D = get_node("/root/dream0/Player")
+@onready var player_controller : CharacterBody3D = get_node("/root/dream0/Player")
 
 func _ready():
 	# Check if player is in the Inn or Dream area using the player controller's state

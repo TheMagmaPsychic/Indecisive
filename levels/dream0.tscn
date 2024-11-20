@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=3 uid="uid://efmugjirbhf6"]
+[gd_scene load_steps=57 format=3 uid="uid://efmugjirbhf6"]
 
 [ext_resource type="Script" path="res://levels/dream_0.gd" id="1_2h0rn"]
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="1_qhma6"]
+[ext_resource type="AudioStream" uid="uid://v3nblcxmbcjk" path="res://sounds/VillageDream.mp3" id="2_53jdy"]
 [ext_resource type="Material" uid="uid://cqlktr7j3dv74" path="res://Textures/Prototype.tres" id="2_r73kg"]
 [ext_resource type="PackedScene" uid="uid://towybnlkqqby" path="res://scripted_objects/moveable.tscn" id="4_0bu7u"]
 
@@ -163,6 +164,11 @@ points = PackedVector3Array(0.571429, 2.00794, 2.53869, -0.5, -1.89512, -2.35735
 
 [node name="Dream0" type="Node3D"]
 script = ExtResource("1_2h0rn")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_53jdy")
+volume_db = -9.37
+autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_35rfm")
