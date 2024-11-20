@@ -13,9 +13,9 @@ extends CharacterBody3D
 @onready var nav_agent = $NavigationAgent3D
 
 var is_target_reached: bool = false
+var needs_to_turn: bool = false
 var patrol_point_index: int = 0
 var cur_patrol_pause_time: float = 1.1
-var cur_look_direction: Vector3 = Vector3.ZERO
 
 
 func _ready() -> void:
@@ -35,6 +35,8 @@ func _physics_process(delta):
 	if patrol_pause_time >= cur_patrol_pause_time:
 		cur_patrol_pause_time += delta
 		return
+	if needs_to_turn:
+		pass
 
 	var next_path_position: Vector3 = nav_agent.get_next_path_position()
 	var direction: Vector3 = global_position.direction_to(next_path_position)
@@ -57,12 +59,12 @@ func update_target_location():
 
 func _on_navigation_agent_3d_target_reached():
 	cur_patrol_pause_time = 0.0
+	needs_to_turn = true
 	update_target_location()
 
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity: Vector3) -> void:
 	velocity = velocity.move_toward(safe_velocity, 0.25)
-	if velocity + global_position != cur_look_direction:
+	if not velocity.is_equal_approx(Vector3.ZERO):
 		look_at(velocity + global_position)
-		cur_look_direction = velocity + global_position
 	move_and_slide()
