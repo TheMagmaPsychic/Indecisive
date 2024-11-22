@@ -19,11 +19,13 @@ func _ready() -> void:
 
 func disable_collision_on(tiles: Array[Array]):
 	for tile in tiles:
-		assert(board[tile[1]][tile[0]] is StaticBody3D, "your board is messed up, tiles are not StaticBody3D")
+		#assert(board[tile[1]][tile[0]] is StaticBody3D, "your board is messed up, tiles are not StaticBody3D")
 		board[tile[1]][tile[0]].set_collision_layer_value(1,false)
+		board[tile[1]][7-tile[0]].set_collision_layer_value(1,false)
 
 
 func enable_collision_on(tiles: Array[Array]):
 	for tile in tiles:
-		assert(board[tile[1]][tile[0]] is StaticBody3D, "your board is messed up, tiles are not StaticBody3D")
+		#assert(board[tile[1]][tile[0]] is StaticBody3D, "your board is messed up, tiles are not StaticBody3D")
 		board[tile[1]][tile[0]].set_collision_layer_value(1,true)
+		board[tile[1]][7-tile[0]].set_collision_layer_value(1,true)
