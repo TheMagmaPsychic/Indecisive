@@ -197,7 +197,10 @@ func get_friction():
 		if x is CSGShape3D:
 			return(0.6)
 		elif x is GridMap:
-			return(0.6) 
+			if x.physics_material:
+				return(x.physics_material.friction)
+			else:
+				return(0.6)
 		elif x.physics_material_override == null:
 			to_remove.append(x)
 	for mesh in to_remove:
