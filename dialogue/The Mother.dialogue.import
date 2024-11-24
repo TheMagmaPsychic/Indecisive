@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://blnldcsxo68fw"
+path="res://.godot/imported/The Mother.dialogue-0d0100b75e6e8e1971070809f1b76616.tres"
+
+[deps]
+
+source_file="res://dialogue/The Mother.dialogue"
+dest_files=["res://.godot/imported/The Mother.dialogue-0d0100b75e6e8e1971070809f1b76616.tres"]
+
+[params]
+
+defaults=true

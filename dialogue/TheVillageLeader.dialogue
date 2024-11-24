@@ -1,0 +1,16 @@
+~ The_Village_Leader
+%The Village_Leader: “A shape is never just a shape. It is a weight. It is a consequence. Which will you carry?”
+%The Village_Leader: “You may leave at any time, but will you? Or have you already decided?”
+
+# if Dream2.Completed == true
+# %The Village_Leader: "He clings to hope because that’s all he has. But hope is fragile. Can you protect it?"
+
+# if Dream3.Completed == true
+# %The Village_Leader: "The path they tread is rigid, unyielding. They teach you to follow, but will you ever lead?"
+
+# if Dream4.Completed == true
+# %The Village_Leader: "Love binds her, but fear consumes her. How long before the bond breaks?"
+
+# if Dream2.Completed && Dream3.Completed && Dream4.Completed && == true
+# %The Village_Leader: "You’ve met them. You’ve seen their dreams. Do you understand them now?"
+=> END

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://c0obn8ix6ymf8"
+path="res://.godot/imported/TheVillageLeader.dialogue-1dd91493870c4a61cc28e6876947d984.tres"
+
+[deps]
+
+source_file="res://dialogue/TheVillageLeader.dialogue"
+dest_files=["res://.godot/imported/TheVillageLeader.dialogue-1dd91493870c4a61cc28e6876947d984.tres"]
+
+[params]
+
+defaults=true
