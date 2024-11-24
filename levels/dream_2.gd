@@ -14,3 +14,13 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 func _on_moveable_object_interacted_with() -> void:
 	$FakeWall.hide()
+
+
+func _on_end_trigger_body_entered(body: Node3D) -> void:
+	if body is Player:
+		SignalBus.level_end.emit("inn", 1, 0)
+
+
+func _on_alt_end_trigger_body_entered(body: Node3D) -> void:
+	if body is Player:
+		SignalBus.level_end.emit("inn", 0, 1)

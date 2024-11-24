@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d1atyxiql0lhp"]
+[gd_scene load_steps=15 format=3 uid="uid://d1atyxiql0lhp"]
 
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="1_3vg1j"]
 [ext_resource type="Script" path="res://levels/dream_4.gd" id="1_ro11q"]
@@ -45,21 +45,18 @@ albedo_color = Color(1, 1, 0, 1)
 material = SubResource("StandardMaterial3D_at1w0")
 size = Vector3(5, 8, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hnlyg"]
-size = Vector3(5, 4, 1)
-
 [node name="Dream4" type="Node3D"]
 script = ExtResource("1_ro11q")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.854964, 0.0175635, 0.51839, -0.418602, 0.613521, 0.6696, -0.306282, -0.789483, 0.53189, 99.3491, 19, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 42.3491, 19, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_d1way")
 
 [node name="Player" parent="." instance=ExtResource("1_3vg1j")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11, 9, -21)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, 0)
@@ -75,7 +72,7 @@ stream = ExtResource("2_n1a3i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0236, 2.46376, -20.395)
 
 [node name="GridMap" type="GridMap" parent="Maze"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.5, 0, 0)
 mesh_library = ExtResource("3_8o3sg")
 cell_size = Vector3(1, 1, 1)
 data = {
@@ -120,12 +117,4 @@ shape = SubResource("BoxShape3D_g4piq")
 wait_time = 30.0
 autostart = true
 
-[node name="StartTimerTrigger" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -26)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StartTimerTrigger"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-shape = SubResource("BoxShape3D_hnlyg")
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_entered" from="StartTimerTrigger" to="." method="_on_start_timer_trigger_body_entered"]

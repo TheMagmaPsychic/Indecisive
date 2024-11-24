@@ -1,11 +1,31 @@
 ~ The_Teacher
-%The Teacher: “Watch closely. Every step has a purpose. Stray, and you’ll regret it.”
-%The Teacher: “The path is not for the faint of heart. Precision is everything.”
-%The Teacher: “Don’t fail. Again. Always try again, or it doesn’t end...”
+% The Teacher: “Watch closely. Every step has a purpose. Stray, and you’ll regret it.”
+% The Teacher: “The path is not for the faint of heart. Precision is everything.”
+% The Teacher: “Don’t fail. Again. Always try again, or it doesn’t end...”
 
 # if Dream3.Completed == true
 # %The Teacher: "Mere Hallucinations. Rest prevails over exhaustion. Yes. Yes. Tricks of the mind."
 # else
 # %The Teacher: "I'm no simple pawn. I refuse to play these childish games!"
 
+=> END
+
+
+~ Day1
+Not yet
+=> END
+
+~ Day2
+Oh is it my turn already
+- Start examination
+	do SignalBus.level_end.emit("dream3",0,0)
+- I need more time to prepare
+=> END
+
+~ Day3
+You've already done me
+=> END
+
+~ Day4
+You've already done me
 => END

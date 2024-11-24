@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://efmugjirbhf6"]
+[gd_scene load_steps=60 format=3 uid="uid://efmugjirbhf6"]
 
 [ext_resource type="Script" path="res://levels/dream_1.gd" id="1_lbxlr"]
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="2_i1l2d"]
@@ -162,7 +162,16 @@ size = Vector3(1, 4, 5)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jko10"]
 points = PackedVector3Array(0.571429, 2.00794, 2.53869, -0.5, -1.89512, -2.35735, -0.5, 1.86338, -2.35735, 0.571429, -2.03968, -2.53869, -0.5, -1.89512, 2.35735, 0.571429, 2.00794, -2.53869, 0.571429, -2.03968, 2.53869, -0.5, 1.86338, 2.35735)
 
-[node name="Dream0" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_ell0v"]
+size = Vector3(1, 6, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_addov"]
+size = Vector3(1, 6, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rvkcb"]
+size = Vector3(7, 1, 14)
+
+[node name="Dream1" type="Node3D"]
 script = ExtResource("1_lbxlr")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
@@ -586,7 +595,26 @@ distance_fade_length = 1664.95
 spot_range = 44.8833
 spot_angle = 30.0
 
+[node name="StaticBody3D" type="StaticBody3D" parent="EndRoom"]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 56, -147, -2.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+mesh = SubResource("BoxMesh_ell0v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+shape = SubResource("BoxShape3D_addov")
+
+[node name="EndDreamTrigger" type="Area3D" parent="EndRoom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -147, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/EndDreamTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
+shape = SubResource("BoxShape3D_rvkcb")
+
 [connection signal="body_entered" from="BallRoom/TriggerArea1" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="PedestalRoom/TriggerArea2" to="." method="_on_trigger_area_2_body_entered"]
 [connection signal="body_entered" from="JumpRoom/JumpRoomTrigger" to="." method="_on_jump_room_trigger_body_entered"]
 [connection signal="body_entered" from="JumpRoom/FallingTrigger" to="." method="_on_falling_trigger_body_entered"]
+[connection signal="body_entered" from="EndRoom/EndDreamTrigger" to="." method="_on_end_dream_trigger_body_entered"]

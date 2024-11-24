@@ -1,11 +1,30 @@
 ~ The_Soldier
-%The Soldier: “I just need to be faster..”
-%The Soldier: “I tried to touch it once... the shapes... but everything turned red.”
-%The Soldier: “Dad would’ve been able to get out…”
+% The Soldier: “I just need to be faster..”
+% The Soldier: “I tried to touch it once... the shapes... but everything turned red.”
+% The Soldier: “Dad would’ve been able to get out…”
 
 # if Dream2.Completed == true
 # %The Soldier: "One down. Just maybe we can go home. I gotta keep trying!"
 # else
 # %The Soldier: "Please...She's all alone. I gotta try harder"
 
+=> END
+
+~ Day1
+Oh is it my turn already
+- Start examination
+	do SignalBus.level_end.emit("dream2",0,0)
+- I need more time to prepare
+=> END
+
+~ Day2
+You've already done me
+=> END
+
+~ Day3
+You've already done me
+=> END
+
+~ Day4
+You've already done me
 => END

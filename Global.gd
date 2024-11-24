@@ -23,6 +23,8 @@ var flags: Dictionary = {
 }
 var is_talking_to_npc:bool = false
 
+var day: int = 0
+
 func _ready():
 	DialogueManager.dialogue_ended.connect(stop_talk_npc)
 	DialogueManager.passed_title.connect(talk_npc)

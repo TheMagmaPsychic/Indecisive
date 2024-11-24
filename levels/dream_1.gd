@@ -7,7 +7,7 @@ var times_failed: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -54,3 +54,8 @@ func _on_falling_trigger_body_entered(body: Node3D) -> void:
 		else:
 			pass # fail task here?
 		times_failed += 1
+
+
+func _on_end_dream_trigger_body_entered(body: Node3D) -> void:
+	if body is Player:
+		SignalBus.level_end.emit("inn", 0, 0)

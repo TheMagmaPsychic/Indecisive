@@ -27,7 +27,6 @@ shape = SubResource("ConvexPolygonShape3D_jna3s")
 avoidance_enabled = true
 radius = 1.0
 use_3d_avoidance = true
-debug_enabled = true
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

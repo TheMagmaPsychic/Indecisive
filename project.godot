@@ -126,7 +126,7 @@ Interact={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://character/Jimmy Dialogue.dialogue", "res://dialogue/jimmy.dialogue")
+locale/translations_pot_files=PackedStringArray("res://character/Jimmy Dialogue.dialogue", "res://dialogue/jimmy.dialogue", "res://dialogue/The Mother.dialogue", "res://dialogue/TheSoldier.dialogue", "res://dialogue/TheTeacher.dialogue", "res://dialogue/TheVillageLeader.dialogue")
 
 [layer_names]
 

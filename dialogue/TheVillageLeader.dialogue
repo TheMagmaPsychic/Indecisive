@@ -1,6 +1,6 @@
 ~ The_Village_Leader
-%The Village_Leader: “A shape is never just a shape. It is a weight. It is a consequence. Which will you carry?”
-%The Village_Leader: “You may leave at any time, but will you? Or have you already decided?”
+% The Village Leader: “A shape is never just a shape. It is a weight. It is a consequence. Which will you carry?”
+% The Village Leader: “You may leave at any time, but will you? Or have you already decided?”
 
 # if Dream2.Completed == true
 # %The Village_Leader: "He clings to hope because that’s all he has. But hope is fragile. Can you protect it?"
@@ -13,4 +13,23 @@
 
 # if Dream2.Completed && Dream3.Completed && Dream4.Completed && == true
 # %The Village_Leader: "You’ve met them. You’ve seen their dreams. Do you understand them now?"
+=> END
+
+~ Day1
+Not yet
+=> END
+
+~ Day2
+Not yet
+=> END
+
+~ Day3
+Not yet
+=> END
+
+~ Day4
+Oh is it my turn already
+- Start examination
+
+- I need more time to prepare
 => END

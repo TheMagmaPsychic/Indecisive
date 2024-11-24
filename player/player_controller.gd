@@ -44,6 +44,8 @@ var current_locomotion: locomotion = locomotion.GROUND
 
 @onready var camera: Camera3D = $Camera
 
+@export var base_friction: float = 0.6
+
 
 #BUG slows down when not moving forward when facing a direction
 
@@ -99,7 +101,7 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 	var interactable_ui: String = ""
 	if $Camera/Pointer.is_colliding():
 		var collider: Node3D = $Camera/Pointer.get_collider()
-		if collider.position.distance_to(position) < 4 and collider.is_in_group("Interactable"):
+		if collider and collider.position.distance_to(position) < 4 and collider.is_in_group("Interactable"):
 			interactable_ui = collider.hover_text
 			if Input.is_action_just_pressed("Interact") and !Global.is_talking_to_npc:
 				$Camera/Pointer.get_collider().interact()
@@ -110,7 +112,7 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 func ground_move():
 	velocity.x += movement_dir.x * speed * -1
 	velocity.z += movement_dir.z * speed * -1
-	var friction = get_friction() #friction on the ground, only way the player slows down
+	var friction = base_friction #friction on the ground, only way the player slows down
 	velocity.x *= friction
 	velocity.z *= friction
 
@@ -143,7 +145,7 @@ func ladder_move():
 	if !$"Ladder ColliderL".is_colliding() and !$"Ladder ColliderL/Ladder ColliderR".is_colliding() and $"Ladder ColliderL/Ladder ColliderD".is_colliding():
 		velocity.x += movement_dir.x * speed * -0.2
 		velocity.z += movement_dir.z * speed * -0.2
-	var friction = get_friction()
+	var friction = base_friction
 	velocity.x *= friction
 	velocity.z *= friction
 	
@@ -189,6 +191,7 @@ func manual_physics_process(delta, original_delta):
 	move_and_slide()
 
 func get_friction():
+	#unused for now
 	var floors: Array = $FloorCollider.get_overlapping_bodies()
 	var most_friction: float = 1
 	floors.erase(self)
