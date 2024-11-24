@@ -1,0 +1,11 @@
+~ The_Mother
+%The Mother: “He’s just a boy… he shouldn’t be here. None of us should be.”
+%The Mother: “The maze changes, just like they do. I’ve tried to map it, but it slips away… like everything else.”
+%The Mother: “Please… find a way out. If not for me, then for him. He’s just a child.”
+
+# if Dream4.Completed == true
+# %The Mother: "I'm so sorry Billy *cries*...
+# else
+# %The Mother: "Where's my sweet boy?... Oh Billy"
+
+=> END

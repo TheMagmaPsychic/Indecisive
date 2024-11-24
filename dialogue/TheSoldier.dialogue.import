@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://bt64xugot364j"
+path="res://.godot/imported/TheSoldier.dialogue-d1dd3f289bc715f6f1c9bc6f22918faf.tres"
+
+[deps]
+
+source_file="res://dialogue/TheSoldier.dialogue"
+dest_files=["res://.godot/imported/TheSoldier.dialogue-d1dd3f289bc715f6f1c9bc6f22918faf.tres"]
+
+[params]
+
+defaults=true
