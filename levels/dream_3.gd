@@ -41,7 +41,7 @@ func _on_alt_exit_trigger_body_entered(body: Node3D) -> void:
 		success += 1
 		alt_success += 1
 		if success >= ROUNDS:
-			SignalBus.LevelEnd.emit(success, alt_success)
+			SignalBus.level_end.emit(success, alt_success)
 
 
 func _on_fail_trigger_body_entered(body: Node3D) -> void:
