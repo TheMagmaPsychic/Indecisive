@@ -74,3 +74,29 @@ dialogue_file = ExtResource("6_o2gpo")
 [node name="Leader" parent="Characters" instance=ExtResource("3_20for")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15.473, -1)
 dialogue_file = ExtResource("7_jymos")
+
+[node name="BlinkEffect" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="BlinkEffect"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -579.0
+offset_top = -4.0
+offset_right = 580.0
+offset_bottom = 333.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="BlinkEffect"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -579.0
+offset_top = -315.0
+offset_right = 580.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)

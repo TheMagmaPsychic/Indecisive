@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://c735ol587klif"]
+[gd_scene load_steps=23 format=3 uid="uid://c735ol587klif"]
 
 [ext_resource type="Script" path="res://levels/dream_2.gd" id="1_3tdal"]
 [ext_resource type="MeshLibrary" uid="uid://dgk884awm76mk" path="res://models/mesh_library.tres" id="2_g2u1p"]
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="3_0h774"]
 [ext_resource type="PackedScene" uid="uid://dvgrt4kdsahg" path="res://character/navigation_character.tscn" id="4_rmthe"]
 [ext_resource type="PackedScene" uid="uid://towybnlkqqby" path="res://scripted_objects/moveable.tscn" id="5_0yauh"]
+[ext_resource type="Script" path="res://scripted_objects/collectable.gd" id="6_rppyy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5fcih"]
 
@@ -56,6 +57,13 @@ height = 1.2
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_naem5"]
 points = PackedVector3Array(0.481498, 0.58685, 0.133107, -0.488584, -0.584706, -0.104763, -0.451208, -0.583719, -0.214015, 0.481498, -0.58685, 0.133107, -0.195527, 0.582668, 0.45991, -0.104855, 0.584679, -0.488561, 0.278553, -0.584248, -0.415142, -0.0135378, -0.586163, 0.499337, -0.488584, 0.584706, -0.104763, 0.422052, 0.580612, -0.26723, -0.43624, -0.588059, 0.243621, 0.29457, 0.5798, 0.403272, -0.104855, -0.584679, -0.488561, -0.469901, 0.584298, 0.169031, 0.479456, -0.584336, -0.141276, 0.29457, -0.5798, 0.403272, 0.169117, 0.58426, -0.46987, -0.304703, 0.58273, -0.395762, 0.133107, 0.58685, 0.481498, -0.3391, -0.579219, 0.366706, -0.304703, -0.58273, -0.395762, 0.0964934, -0.587036, -0.490549, 0.499337, 0.586163, -0.0135378, -0.37485, 0.578586, 0.330089, 0.403272, 0.5798, 0.29457, -0.490563, -0.587052, 0.096399, -0.379652, 0.585904, -0.324777, -0.195527, -0.582668, 0.45991, 0.445885, -0.588221, 0.225323, 0.188114, -0.58668, 0.463045, 0.422052, -0.580612, -0.26723, 0.330143, 0.578512, -0.374802)
+
+[sub_resource type="TorusMesh" id="TorusMesh_pnx6o"]
+inner_radius = 0.1
+outer_radius = 0.3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8huec"]
+size = Vector3(0.503906, 0.578125, 0.228516)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iwb3c"]
 size = Vector3(1, 10, 5)
@@ -249,12 +257,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 68)
 [node name="Marker3D4" type="Marker3D" parent="Patroller5/PatrolMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 84)
 
-[node name="Moveable" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_0yauh")]
+[node name="Moveable" parent="." instance=ExtResource("5_0yauh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.47685, 13.0519)
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-player = NodePath("../Player")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Moveable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
@@ -295,6 +302,17 @@ mesh = SubResource("CylinderMesh_e7fgm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pedestal"]
 shape = SubResource("ConvexPolygonShape3D_naem5")
 
+[node name="Pickup" type="StaticBody3D" parent="Pedestal" groups=["Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 1.13054, -0.0346909)
+script = ExtResource("6_rppyy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pedestal/Pickup"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_pnx6o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pedestal/Pickup"]
+shape = SubResource("BoxShape3D_8huec")
+
 [node name="EndTrigger" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, 80)
 
@@ -315,5 +333,6 @@ shape = SubResource("BoxShape3D_iwb3c")
 [connection signal="body_entered" from="Patroller4/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="Patroller5/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="object_interacted_with" from="Moveable" to="." method="_on_moveable_object_interacted_with"]
+[connection signal="item_collected" from="Pedestal/Pickup" to="." method="_on_pickup_item_collected"]
 [connection signal="body_entered" from="EndTrigger" to="." method="_on_end_trigger_body_entered"]
 [connection signal="body_entered" from="AltEndTrigger" to="." method="_on_alt_end_trigger_body_entered"]

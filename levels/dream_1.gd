@@ -58,4 +58,10 @@ func _on_falling_trigger_body_entered(body: Node3D) -> void:
 
 func _on_end_dream_trigger_body_entered(body: Node3D) -> void:
 	if body is Player:
+		$EndRoom/EndDreamTrigger.call_deferred("set_monitoring", false)
+		var tween = create_tween()
+		$EndRoom/Door/AudioStreamPlayer3D.play()
+		tween.tween_property($EndRoom/Door, "rotation:y", 0, 0.5)
+		tween.tween_property($EndRoom/SpotLight3D, "light_energy", 0, 3)
+		await tween.finished
 		SignalBus.level_end.emit("inn", 0, 0)

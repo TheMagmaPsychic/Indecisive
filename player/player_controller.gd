@@ -25,6 +25,7 @@ var was_just_sprinting:bool = false #was player just sprinting
 var sprint_toggled:bool = false
 var is_jumping:bool = false
 var is_standing_jump:bool = false
+var is_frozen: bool = false
 var max_air_acceleration:float = 3
 
 var max_coyote:float = 0.2
@@ -78,6 +79,9 @@ func _input(event):
 func _physics_process(delta): #if going faster than 100%, doesn't recalculate input on each process
 	#The player will only get ~70% of the sprint bonus if also strafing because of vector normalization
 	#If using a joystick, the player can be "sprinting" at very slow movement speeds
+	if is_frozen:
+		return
+	
 	var look_input = Input.get_vector("Look Left", "Look Right", "Look Down", "Look Up", 0.2)
 	if look_input != Vector2(0,0):
 		rotate_y(-look_input.x * joystick_sensitivity.x)
@@ -101,10 +105,10 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 	var interactable_ui: String = ""
 	if $Camera/Pointer.is_colliding():
 		var collider: Node3D = $Camera/Pointer.get_collider()
-		if collider and collider.position.distance_to(position) < 4 and collider.is_in_group("Interactable"):
+		if collider and collider.global_position.distance_to(global_position) < 4 and collider.is_in_group("Interactable"):
 			interactable_ui = collider.hover_text
 			if Input.is_action_just_pressed("Interact") and !Global.is_talking_to_npc:
-				$Camera/Pointer.get_collider().interact()
+				$Camera/Pointer.get_collider().interact(self)
 	SignalBus.update_UI_interact.emit(interactable_ui)
 	
 	
@@ -152,6 +156,11 @@ func ladder_move():
 	velocity.y *= 0.7
 
 func manual_physics_process(delta, original_delta):
+	if is_frozen:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+	
 	if is_sprinting and input.y < 0.3: #if shift and w are being held, sprint only in the direction you're looking
 		movement_dir = transform.basis * Vector3(input.x, 0, input.y * sprint_multiplier)
 	else:

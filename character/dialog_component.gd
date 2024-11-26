@@ -6,7 +6,7 @@ extends Area3D
 var is_player_in_zone: bool = false
 
 
-func interact() -> void:
+func interact(_player: Player) -> void:
 	print("talked to")
 	DialogueManager.show_dialogue_balloon(dialog_script)
 

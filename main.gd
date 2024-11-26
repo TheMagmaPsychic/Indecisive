@@ -33,5 +33,6 @@ func _on_player_move_request(new_position: Vector3, new_rotation: Vector3) -> vo
 
 
 func _on_level_end(next_scene: StringName, sanity_change: int, knowledge_change: int):
+	#play transition
 	unload_level()
 	load_level(next_scene)

@@ -2,8 +2,6 @@ class_name InteractableBody
 extends RigidBody3D
 
 #TODO consider making the marker3D an accessible node of player
-#TODO get reference to play from function call instead of export, this is for testing
-@export var player: Player
 
 ## How quickly the object will catch up with the mouse
 @export var snappiness: float = 0.1
@@ -15,14 +13,26 @@ extends RigidBody3D
 
 
 var is_held: bool = false
+var is_on_cooldown: bool = false
 var hover_text: String = "Pick up"
 var drag_point: Marker3D
+var cur_drop_cooldown: float = 1
+
+const DROP_COOLDOWN: float = 0.2
 
 signal object_interacted_with()
 
 
-func interact() -> void:
-	if not is_held and is_interactable:
+func _process(delta: float) -> void:
+	if is_on_cooldown:
+		if cur_drop_cooldown > DROP_COOLDOWN:
+			is_on_cooldown = false
+		else:
+			cur_drop_cooldown += delta
+
+
+func interact(player: Player) -> void:
+	if not is_held and is_interactable and not is_on_cooldown:
 		object_interacted_with.emit()
 		is_held = true
 		
@@ -38,6 +48,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if is_held:
 			is_held = false
 			drag_point.queue_free()
+			is_on_cooldown = true
+			cur_drop_cooldown = 0.0
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
@@ -53,3 +65,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 func _set_is_interactable(new_state):
 	is_interactable = new_state
 	is_held = false
+
+
+func _on_body_entered(body: Node) -> void:
+	if not body is Player:
+		if linear_velocity.length() > 1.6 and not is_held:
+			$AudioStreamPlayer3D.play()

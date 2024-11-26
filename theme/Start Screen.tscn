@@ -1,0 +1,146 @@
+[gd_scene load_steps=5 format=3 uid="uid://w1xjtf1rd76i"]
+
+[ext_resource type="Script" path="res://theme/Start Screen.gd" id="1_dht2j"]
+[ext_resource type="PackedScene" uid="uid://cvx7jemg3eoaw" path="res://theme/credits.tscn" id="3_dle77"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2p61"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_re4dw"]
+
+[node name="Control" type="CanvasLayer"]
+script = ExtResource("1_dht2j")
+credits = ExtResource("3_dle77")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -185.0
+offset_right = 310.0
+offset_bottom = -50.0
+grow_vertical = 0
+alignment = 2
+
+[node name="Start" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "Start"
+
+[node name="Credits" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "Credits"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -536.0
+offset_top = 463.0
+offset_right = -52.0
+offset_bottom = 598.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_styles/separator = SubResource("StyleBoxEmpty_c2p61")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Music
+"
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Sound Effects"
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/separator = SubResource("StyleBoxEmpty_re4dw")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.93
+alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+value = 0.8
+scrollable = false
+ticks_on_borders = true
+
+[node name="VoiceSlider" type="HSlider" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 6
+focus_mode = 0
+max_value = 5.0
+step = 0.1
+value = 4.0
+scrollable = false
+ticks_on_borders = true
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/separator = SubResource("StyleBoxEmpty_re4dw")
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+theme_override_styles/separator = SubResource("StyleBoxEmpty_c2p61")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[connection signal="pressed" from="Control/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/VoiceSlider" to="." method="_on_effects_slider_value_changed"]

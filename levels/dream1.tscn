@@ -1,10 +1,12 @@
-[gd_scene load_steps=60 format=3 uid="uid://efmugjirbhf6"]
+[gd_scene load_steps=62 format=3 uid="uid://efmugjirbhf6"]
 
 [ext_resource type="Script" path="res://levels/dream_1.gd" id="1_lbxlr"]
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="2_i1l2d"]
 [ext_resource type="AudioStream" uid="uid://v3nblcxmbcjk" path="res://sounds/VillageDream.mp3" id="2_up7ce"]
 [ext_resource type="Material" uid="uid://cqlktr7j3dv74" path="res://Textures/Prototype.tres" id="5_sbrew"]
 [ext_resource type="PackedScene" uid="uid://towybnlkqqby" path="res://scripted_objects/moveable.tscn" id="5_wkyjq"]
+[ext_resource type="AudioStream" uid="uid://bibwqdnnupnqa" path="res://sounds/ball_bounce.mp3" id="5_x7hyi"]
+[ext_resource type="AudioStream" uid="uid://5fynkigh4uk7" path="res://sounds/Dungeon Door Close Wet A.wav" id="6_pr3sw"]
 
 [sub_resource type="Environment" id="Environment_35rfm"]
 background_mode = 1
@@ -185,11 +187,14 @@ environment = SubResource("Environment_35rfm")
 [node name="Player" parent="." instance=ExtResource("2_i1l2d")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
-[node name="Moveable" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_wkyjq")]
+[node name="Moveable" parent="." instance=ExtResource("5_wkyjq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2, 0)
 physics_material_override = SubResource("PhysicsMaterial_opy30")
 freeze = true
-player = NodePath("../Player")
+contact_monitor = true
+max_contacts_reported = 1
+snappiness = 0.5
+follow_speed = 8.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Moveable"]
 mesh = SubResource("SphereMesh_68f4p")
@@ -200,6 +205,10 @@ shape = SubResource("SphereShape3D_0v7k4")
 [node name="OmniLight3D" type="OmniLight3D" parent="Moveable"]
 light_energy = 5.267
 light_specular = 1.567
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Moveable"]
+stream = ExtResource("5_x7hyi")
+max_polyphony = 10
 
 [node name="StartRoom" type="Node" parent="."]
 
@@ -595,16 +604,20 @@ distance_fade_length = 1664.95
 spot_range = 44.8833
 spot_angle = 30.0
 
-[node name="StaticBody3D" type="StaticBody3D" parent="EndRoom"]
+[node name="Door" type="StaticBody3D" parent="EndRoom"]
 transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 56, -147, -2.5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
 mesh = SubResource("BoxMesh_ell0v")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
 shape = SubResource("BoxShape3D_addov")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="EndRoom/Door"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0.578295, 0, 1.00164)
+stream = ExtResource("6_pr3sw")
 
 [node name="EndDreamTrigger" type="Area3D" parent="EndRoom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -147, 0)
@@ -613,6 +626,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -147, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
 shape = SubResource("BoxShape3D_rvkcb")
 
+[connection signal="body_entered" from="Moveable" to="Moveable" method="_on_body_entered"]
 [connection signal="body_entered" from="BallRoom/TriggerArea1" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="PedestalRoom/TriggerArea2" to="." method="_on_trigger_area_2_body_entered"]
 [connection signal="body_entered" from="JumpRoom/JumpRoomTrigger" to="." method="_on_jump_room_trigger_body_entered"]
