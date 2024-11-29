@@ -28,11 +28,11 @@ height = 1.2
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i871a"]
 points = PackedVector3Array(0.481498, 0.58685, 0.133107, -0.488584, -0.584706, -0.104763, -0.451208, -0.583719, -0.214015, 0.481498, -0.58685, 0.133107, -0.195527, 0.582668, 0.45991, -0.104855, 0.584679, -0.488561, 0.278553, -0.584248, -0.415142, -0.0135378, -0.586163, 0.499337, -0.488584, 0.584706, -0.104763, 0.422052, 0.580612, -0.26723, -0.43624, -0.588059, 0.243621, 0.29457, 0.5798, 0.403272, -0.104855, -0.584679, -0.488561, -0.469901, 0.584298, 0.169031, 0.479456, -0.584336, -0.141276, 0.29457, -0.5798, 0.403272, 0.169117, 0.58426, -0.46987, -0.304703, 0.58273, -0.395762, 0.133107, 0.58685, 0.481498, -0.3391, -0.579219, 0.366706, -0.304703, -0.58273, -0.395762, 0.0964934, -0.587036, -0.490549, 0.499337, 0.586163, -0.0135378, -0.37485, 0.578586, 0.330089, 0.403272, 0.5798, 0.29457, -0.490563, -0.587052, 0.096399, -0.379652, 0.585904, -0.324777, -0.195527, -0.582668, 0.45991, 0.445885, -0.588221, 0.225323, 0.188114, -0.58668, 0.463045, 0.422052, -0.580612, -0.26723, 0.330143, 0.578512, -0.374802)
 
-[sub_resource type="PrismMesh" id="PrismMesh_3gbdg"]
-size = Vector3(0.5, 0.5, 0.5)
+[sub_resource type="BoxMesh" id="BoxMesh_sb8ff"]
+size = Vector3(0.4, 0.4, 0.4)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h6baf"]
-points = PackedVector3Array(-0.25, -0.25, -0.25, 0.00732584, 0.235348, 0.235348, 0.0367606, 0.176479, 0.235305, -0.25, -0.25, 0.25, 0.25, -0.25, -0.25, -0.00732584, 0.235348, -0.235348, 0.25, -0.25, 0.25, -0.00732584, 0.235348, 0.235348, 0.00732584, 0.235348, -0.235348)
+[sub_resource type="BoxShape3D" id="BoxShape3D_73w85"]
+size = Vector3(0.4, 0.4, 0.4)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ugdeb"]
 height = 15.0
@@ -94,16 +94,14 @@ mesh = SubResource("CylinderMesh_c33tx")
 shape = SubResource("ConvexPolygonShape3D_i871a")
 
 [node name="StartPickup" type="StaticBody3D" parent="Maze/Maze/Pedestal" groups=["Interactable"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(0.707107, -0.707107, 0, 0.579228, 0.579228, -0.573576, 0.40558, 0.40558, 0.819152, 0, 1, 0)
 script = ExtResource("5_c56w7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Maze/Maze/Pedestal/StartPickup"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1, 0)
-mesh = SubResource("PrismMesh_3gbdg")
+mesh = SubResource("BoxMesh_sb8ff")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Maze/Maze/Pedestal/StartPickup"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1, 0)
-shape = SubResource("ConvexPolygonShape3D_h6baf")
+shape = SubResource("BoxShape3D_73w85")
 
 [node name="Pedestal2" type="StaticBody3D" parent="Maze/Maze"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -31.7382, 0.41812, -0.0524998)
@@ -114,6 +112,16 @@ mesh = SubResource("CylinderMesh_c33tx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Maze/Maze/Pedestal2"]
 shape = SubResource("ConvexPolygonShape3D_i871a")
 
+[node name="Pickup2" type="StaticBody3D" parent="Maze/Maze/Pedestal2" groups=["Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("5_c56w7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Maze/Maze/Pedestal2/Pickup2"]
+mesh = SubResource("BoxMesh_sb8ff")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maze/Maze/Pedestal2/Pickup2"]
+shape = SubResource("BoxShape3D_73w85")
+
 [node name="Pedestal3" type="StaticBody3D" parent="Maze/Maze"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0117998, 0.41812, 30.9475)
 
@@ -123,6 +131,16 @@ mesh = SubResource("CylinderMesh_c33tx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Maze/Maze/Pedestal3"]
 shape = SubResource("ConvexPolygonShape3D_i871a")
 
+[node name="Pickup3" type="StaticBody3D" parent="Maze/Maze/Pedestal3" groups=["Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("5_c56w7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Maze/Maze/Pedestal3/Pickup3"]
+mesh = SubResource("BoxMesh_sb8ff")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maze/Maze/Pedestal3/Pickup3"]
+shape = SubResource("BoxShape3D_73w85")
+
 [node name="Pedestal4" type="StaticBody3D" parent="Maze/Maze"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0117998, 0.41812, -31.5525)
 
@@ -131,6 +149,16 @@ mesh = SubResource("CylinderMesh_c33tx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Maze/Maze/Pedestal4"]
 shape = SubResource("ConvexPolygonShape3D_i871a")
+
+[node name="Pickup4" type="StaticBody3D" parent="Maze/Maze/Pedestal4" groups=["Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("5_c56w7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Maze/Maze/Pedestal4/Pickup4"]
+mesh = SubResource("BoxMesh_sb8ff")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Maze/Maze/Pedestal4/Pickup4"]
+shape = SubResource("BoxShape3D_73w85")
 
 [node name="Pedestal5" type="StaticBody3D" parent="Maze/Maze"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 3.867, 0)

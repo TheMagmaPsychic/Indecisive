@@ -26,6 +26,7 @@ var sprint_toggled:bool = false
 var is_jumping:bool = false
 var is_standing_jump:bool = false
 var is_frozen: bool = false
+var was_jumping: bool = false
 var max_air_acceleration:float = 3
 
 var max_coyote:float = 0.2
@@ -98,9 +99,14 @@ func _physics_process(delta): #if going faster than 100%, doesn't recalculate in
 		tween.tween_property($Camera, "fov", 75, 0.3)
 	
 	if !is_on_floor() and current_locomotion != locomotion.LADDER:
+		was_jumping = true
 		continue_jump(delta)
 	elif current_locomotion != locomotion.LADDER:
 		is_jumping = false
+	
+	if was_jumping and is_on_floor():
+		$Land.play()
+		was_jumping = false
 	
 	var interactable_ui: String = ""
 	if $Camera/Pointer.is_colliding():
@@ -233,6 +239,7 @@ func get_friction():
 	return(most_friction)
 
 func jump():
+	$Jump.play()
 	if movement_speed <= 3:
 		movement_dir = Vector3(0, 0, 0)
 		is_standing_jump = true

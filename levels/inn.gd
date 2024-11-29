@@ -4,7 +4,10 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalBus.set_text_request.emit("")
 	blink()
+	$Wake.play()
+	Global.fade_in_music(create_tween(),$BackgroundMusic, 5)
 	Global.day += 1
 	setup_inn()
 

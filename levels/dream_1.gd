@@ -4,17 +4,27 @@ extends Node3D
 @onready var blocking_wall_2: CollisionShape3D = $StartRoom/RoomWalls/negxWall
 
 var times_failed: int = 0
+var has_jumped: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	say_command($Commands/Jump)
+
+
+func say_command(command: AudioStreamPlayer):
+	$Commands/CommandDelay.start()
+	await $Commands/CommandDelay.timeout
+	SignalBus.set_text_request.emit(command.name)
+	command.play()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey or event is InputEventJoypadButton:
-		if event.is_action_pressed("Jump"):
+		if not has_jumped and event.is_action_pressed("Jump"):
+			has_jumped = true
 			blocking_wall_1.disabled = true
 			blocking_wall_1.visible = false
+			say_command($Commands/Retrive)
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -37,6 +47,7 @@ func _on_trigger_area_2_body_entered(body: Node3D) -> void:
 		await tween.finished
 		$PedestalRoom/RoomWalls/Floor.set_deferred("disabled", true)
 		$PedestalRoom/Pedestal.set_deferred("visible", false)
+
 
 func _on_jump_room_trigger_body_entered(body: Node3D) -> void:
 	if body is Player:
@@ -63,5 +74,12 @@ func _on_end_dream_trigger_body_entered(body: Node3D) -> void:
 		$EndRoom/Door/AudioStreamPlayer3D.play()
 		tween.tween_property($EndRoom/Door, "rotation:y", 0, 0.5)
 		tween.tween_property($EndRoom/SpotLight3D, "light_energy", 0, 3)
+		Global.fade_out_music(create_tween(), $BackgroundMusic, 3)
 		await tween.finished
+		say_command($Commands/Wake)
+		await $Commands/Wake.finished
 		SignalBus.level_end.emit("inn", 0, 0)
+
+
+func _on_moveable_object_interacted_with() -> void:
+	say_command($Commands/Deposit)

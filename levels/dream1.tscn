@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://efmugjirbhf6"]
+[gd_scene load_steps=66 format=3 uid="uid://efmugjirbhf6"]
 
 [ext_resource type="Script" path="res://levels/dream_1.gd" id="1_lbxlr"]
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="2_i1l2d"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://towybnlkqqby" path="res://scripted_objects/moveable.tscn" id="5_wkyjq"]
 [ext_resource type="AudioStream" uid="uid://bibwqdnnupnqa" path="res://sounds/ball_bounce.mp3" id="5_x7hyi"]
 [ext_resource type="AudioStream" uid="uid://5fynkigh4uk7" path="res://sounds/Dungeon Door Close Wet A.wav" id="6_pr3sw"]
+[ext_resource type="AudioStream" uid="uid://6jgxgqwmovko" path="res://sounds/commands/01-Jump.wav" id="8_syljp"]
+[ext_resource type="AudioStream" uid="uid://cjw8t16h6uxhq" path="res://sounds/commands/02-Retrieve.wav" id="9_woi0y"]
+[ext_resource type="AudioStream" uid="uid://cq8486s1t650g" path="res://sounds/commands/03-Deposit.wav" id="10_tryee"]
+[ext_resource type="AudioStream" uid="uid://w3fxyh7pgvli" path="res://sounds/commands/09-Wake.wav" id="11_rv2nm"]
 
 [sub_resource type="Environment" id="Environment_35rfm"]
 background_mode = 1
@@ -626,7 +630,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69, -147, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -0.5)
 shape = SubResource("BoxShape3D_rvkcb")
 
+[node name="Commands" type="Node" parent="."]
+
+[node name="CommandDelay" type="Timer" parent="Commands"]
+wait_time = 2.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="Commands"]
+stream = ExtResource("8_syljp")
+
+[node name="Retrive" type="AudioStreamPlayer" parent="Commands"]
+stream = ExtResource("9_woi0y")
+
+[node name="Deposit" type="AudioStreamPlayer" parent="Commands"]
+stream = ExtResource("10_tryee")
+
+[node name="Wake" type="AudioStreamPlayer" parent="Commands"]
+stream = ExtResource("11_rv2nm")
+
 [connection signal="body_entered" from="Moveable" to="Moveable" method="_on_body_entered"]
+[connection signal="object_interacted_with" from="Moveable" to="." method="_on_moveable_object_interacted_with"]
 [connection signal="body_entered" from="BallRoom/TriggerArea1" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="PedestalRoom/TriggerArea2" to="." method="_on_trigger_area_2_body_entered"]
 [connection signal="body_entered" from="JumpRoom/JumpRoomTrigger" to="." method="_on_jump_room_trigger_body_entered"]

@@ -71,3 +71,12 @@ func talk_npc(_resource):
 
 func stop_talk_npc(_resource):
 	is_talking_to_npc = false
+
+func fade_out_music(tween: Tween, player: AudioStreamPlayer, tween_speed: float = 2.0) -> Tween:
+	tween.tween_property(player, "volume_db", -80, tween_speed).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+	return tween
+
+
+func fade_in_music(tween: Tween, player: AudioStreamPlayer, tween_speed: float = 2.0) -> Tween:
+	tween.tween_property(player, "volume_db", player.volume_db, tween_speed).from(-80).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	return tween
