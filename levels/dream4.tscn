@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d1atyxiql0lhp"]
+[gd_scene load_steps=23 format=3 uid="uid://d1atyxiql0lhp"]
 
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="1_3vg1j"]
 [ext_resource type="Script" path="res://levels/dream_4.gd" id="1_ro11q"]
@@ -52,6 +52,9 @@ size = Vector3(150, 1, 150)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hhg77"]
 size = Vector3(20.5986, 3, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vm2hx"]
+size = Vector3(1, 6, 5)
 
 [node name="Dream4" type="Node3D"]
 script = ExtResource("1_ro11q")
@@ -205,6 +208,13 @@ shape = SubResource("BoxShape3D_hhg77")
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 5, 0)
 shape = SubResource("BoxShape3D_hhg77")
 
+[node name="StartTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 4, -21)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.5, 0)
+shape = SubResource("BoxShape3D_vm2hx")
+
 [node name="MazeCooldown" type="Timer" parent="."]
 wait_time = 5.0
 
@@ -217,4 +227,5 @@ volume_db = 3.748
 [connection signal="item_collected" from="Maze/Maze/Pedestal3/Pickup3" to="." method="_on_pickup_item_collected"]
 [connection signal="item_collected" from="Maze/Maze/Pedestal4/Pickup4" to="." method="_on_pickup_item_collected"]
 [connection signal="body_entered" from="RotateTrigger" to="." method="_on_rotate_trigger_body_entered"]
+[connection signal="body_entered" from="StartTrigger" to="." method="_on_start_trigger_body_entered"]
 [connection signal="timeout" from="MazeCooldown" to="." method="_on_maze_cooldown_timeout"]

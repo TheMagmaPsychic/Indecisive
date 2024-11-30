@@ -1,6 +1,6 @@
 extends Node3D
 
-var color_cycle: Array[Color] = [Color.RED, Color.BLUE, Color.YELLOW, Color.BLACK]
+var color_cycle: Array[Color] = [Color.RED, Color.BLUE, Color.BLACK]
 var color_index: int = 0
 var is_maze_ready: bool = true
 var collected_items: int = 0
@@ -37,3 +37,10 @@ func _on_pickup_item_collected() -> void:
 		SignalBus.level_end.emit("inn", collected_items, )
 	else:
 		$Commands/Retrieve.play()
+
+
+func _on_start_trigger_body_entered(body: Node3D) -> void:
+	if body is Player:
+		$Commands/Retrieve.play()
+		SignalBus.set_text_request.emit("Retrieve")
+		$StartTrigger.call_deferred("set_monitoring", false)

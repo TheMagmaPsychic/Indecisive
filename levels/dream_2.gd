@@ -19,6 +19,7 @@ func _on_end_trigger_body_entered(body: Node3D) -> void:
 		tween.parallel().tween_property($Player/SpotLight3D, "light_energy", 0, 3)
 		await tween.finished
 		$Commands/Wake.play()
+		SignalBus.set_text_request.emit("Wake")
 		await $Commands/Wake.finished
 		SignalBus.level_end.emit("inn", 1, 0)
 

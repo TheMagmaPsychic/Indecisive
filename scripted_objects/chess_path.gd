@@ -13,7 +13,7 @@ func _on_set_new_path_request(path: Curve3D):
 	curve = path
 
 
-func _on_move_request(speed: float = 6.0):
+func _on_move_request(speed: float = 8.0):
 	var tween = create_tween()
 	tween.tween_property($PathFollow3D,"progress_ratio", 1.0, speed)
 	tween.tween_callback($PathFollow3D.set_visible.bind(false))
