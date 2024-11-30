@@ -8,11 +8,6 @@ func _ready() -> void:
 	Global.fade_in_music(create_tween(), $BackgroundMusic, 3)
 
 
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body is Player:
-		body.is_frozen = true
-
-
 func _on_end_trigger_body_entered(body: Node3D) -> void:
 	if body is Player and not is_end_triggered:
 		is_end_triggered = true
@@ -21,6 +16,7 @@ func _on_end_trigger_body_entered(body: Node3D) -> void:
 		tween.tween_property($EndRoom/StaticBody3D/MeshInstance3D, "position:y", 0, 2)
 		Global.fade_out_music(create_tween(), $BackgroundMusic, 6)
 		tween.tween_property($EndRoom/OmniLight3D, "light_energy", 0, 3)
+		tween.parallel().tween_property($Player/SpotLight3D, "light_energy", 0, 3)
 		await tween.finished
 		$Commands/Wake.play()
 		await $Commands/Wake.finished

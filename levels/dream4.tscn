@@ -1,10 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://d1atyxiql0lhp"]
+[gd_scene load_steps=22 format=3 uid="uid://d1atyxiql0lhp"]
 
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="1_3vg1j"]
 [ext_resource type="Script" path="res://levels/dream_4.gd" id="1_ro11q"]
+[ext_resource type="AudioStream" uid="uid://cjw8t16h6uxhq" path="res://sounds/commands/02-Retrieve.wav" id="2_jenca"]
 [ext_resource type="AudioStream" uid="uid://cy4fsbju1iq24" path="res://sounds/single-church-bell-156463.mp3" id="2_n1a3i"]
+[ext_resource type="AudioStream" uid="uid://j025phiw5nu" path="res://sounds/tracks/StableDream.wav" id="2_nu0qg"]
 [ext_resource type="MeshLibrary" uid="uid://dgk884awm76mk" path="res://models/mesh_library.tres" id="3_8o3sg"]
+[ext_resource type="AudioStream" uid="uid://w3fxyh7pgvli" path="res://sounds/commands/09-Wake.wav" id="4_b70vy"]
 [ext_resource type="Script" path="res://scripted_objects/collectable.gd" id="5_c56w7"]
+[ext_resource type="AudioStream" uid="uid://bfe863yiyys3h" path="res://sounds/earthquake-loop-64704.mp3" id="8_gufsx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3oqc8"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -51,6 +55,19 @@ size = Vector3(20.5986, 3, 2)
 
 [node name="Dream4" type="Node3D"]
 script = ExtResource("1_ro11q")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nu0qg")
+volume_db = -7.495
+autoplay = true
+
+[node name="Commands" type="Node" parent="."]
+
+[node name="Retrieve" type="AudioStreamPlayer" parent="Commands"]
+stream = ExtResource("2_jenca")
+
+[node name="Wake" type="AudioStreamPlayer" parent="Commands"]
+stream = ExtResource("4_b70vy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 42.3491, 19, 0)
@@ -188,16 +205,16 @@ shape = SubResource("BoxShape3D_hhg77")
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 5, 0)
 shape = SubResource("BoxShape3D_hhg77")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true
-
 [node name="MazeCooldown" type="Timer" parent="."]
 wait_time = 5.0
 
-[node name="Prizes" type="Node" parent="."]
+[node name="MazeRumble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_gufsx")
+volume_db = 3.748
 
 [connection signal="item_collected" from="Maze/Maze/Pedestal/StartPickup" to="." method="_on_start_pickup_item_collected"]
+[connection signal="item_collected" from="Maze/Maze/Pedestal2/Pickup2" to="." method="_on_pickup_item_collected"]
+[connection signal="item_collected" from="Maze/Maze/Pedestal3/Pickup3" to="." method="_on_pickup_item_collected"]
+[connection signal="item_collected" from="Maze/Maze/Pedestal4/Pickup4" to="." method="_on_pickup_item_collected"]
 [connection signal="body_entered" from="RotateTrigger" to="." method="_on_rotate_trigger_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="MazeCooldown" to="." method="_on_maze_cooldown_timeout"]

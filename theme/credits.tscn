@@ -75,7 +75,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 10
-text = "Programming, Game Design"
+text = "Programming"
 horizontal_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -100,10 +100,66 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 10
-text = "Programming, Game Design"
+text = "Programming"
 horizontal_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_1niqw")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer5"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Regalian Knight
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "Game Design"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxEmpty_p7yod")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "MulanGirl
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "Game Design"
+horizontal_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_1niqw")
@@ -121,8 +177,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 12
-text = "Regalian Knight
-"
+text = "Clave"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2/VBoxContainer5"]
@@ -147,7 +202,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 12
-text = "MulanGirl
+text = "Lexa
 "
 horizontal_alignment = 1
 
@@ -159,24 +214,60 @@ theme_override_font_sizes/font_size = 10
 text = "Art"
 horizontal_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator5" type="HSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_1niqw")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+[node name="VBoxContainer5" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer5"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 12
-text = "Clave"
+text = "TheTurtleBox
+"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 10
-text = "Audio, Game Design, Quality Assurance"
+text = "Composer"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxEmpty_p7yod")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "GrantJohnsonVO
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 10
+text = "Voice-over, Sound Effects"
 horizontal_alignment = 1
 
 [node name="HSeparator3" type="HSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]

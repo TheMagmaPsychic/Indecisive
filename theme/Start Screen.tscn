@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://w1xjtf1rd76i"]
+[gd_scene load_steps=7 format=3 uid="uid://w1xjtf1rd76i"]
 
 [ext_resource type="Script" path="res://theme/Start Screen.gd" id="1_dht2j"]
 [ext_resource type="PackedScene" uid="uid://cvx7jemg3eoaw" path="res://theme/credits.tscn" id="3_dle77"]
+[ext_resource type="AudioStream" uid="uid://bwg3nyr8cd8il" path="res://sounds/tracks/Dreamer.wav" id="3_pkvgt"]
+[ext_resource type="AudioStream" uid="uid://6jgxgqwmovko" path="res://sounds/commands/01-Jump.wav" id="4_50mf7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2p61"]
 
@@ -119,9 +121,9 @@ ticks_on_borders = true
 layout_mode = 2
 size_flags_vertical = 6
 focus_mode = 0
-max_value = 5.0
-step = 0.1
-value = 4.0
+max_value = 1.0
+step = 0.01
+value = 0.8
 scrollable = false
 ticks_on_borders = true
 
@@ -138,9 +140,17 @@ size_flags_stretch_ratio = 0.4
 theme_override_styles/separator = SubResource("StyleBoxEmpty_c2p61")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pkvgt")
 autoplay = true
+bus = &"Music"
+
+[node name="VoiceTest" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_50mf7")
+bus = &"Voice"
 
 [connection signal="pressed" from="Control/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/VoiceSlider" to="." method="_on_voice_slider_drag_ended"]
+[connection signal="drag_started" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/VoiceSlider" to="." method="_on_voice_slider_drag_started"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/VoiceSlider" to="." method="_on_effects_slider_value_changed"]

@@ -2,7 +2,8 @@ extends Node3D
 
 
 var board: Array[Array] = []
-var first_path: Array[Array] = [[3,0], [3,1], [3,2], [4,2], [5,2], [5,3], [5,4], [6,4], [7,4], [7,5], [7,6], [7,7]]
+var first_path: Array[Array] = [[3,0], [3,1], [3,2], [4,2], [5,2], [5,3], [5,4], [6,4], [7,4], [7,5], [7,6], [7,7],
+								[6,0], [6,1], [6,2], [6,3], [5,3], [4,3], [3,3], [2,3], [2,4], [2,5], [2,6], [2,7],]
 
 
 # Called when the node enters the scene tree for the first time.
