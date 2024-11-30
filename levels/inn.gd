@@ -23,6 +23,7 @@ func setup_inn():
 		4:
 			pass
 
+
 func blink():
 	var tween = create_tween()
 	tween.parallel().tween_property($BlinkEffect/ColorRect, "position:y", -345, 2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)

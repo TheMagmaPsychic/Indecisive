@@ -24,7 +24,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			has_jumped = true
 			blocking_wall_1.disabled = true
 			blocking_wall_1.visible = false
-			say_command($Commands/Retrive)
+			say_command($Commands/Retrieve)
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

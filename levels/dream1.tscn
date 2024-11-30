@@ -640,7 +640,7 @@ wait_time = 2.0
 stream = ExtResource("8_syljp")
 bus = &"Voice"
 
-[node name="Retrive" type="AudioStreamPlayer" parent="Commands"]
+[node name="Retrieve" type="AudioStreamPlayer" parent="Commands"]
 stream = ExtResource("9_woi0y")
 bus = &"Voice"
 
