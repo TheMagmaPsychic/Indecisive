@@ -22,10 +22,10 @@ sky = SubResource("Sky_reau0")
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.1
 tonemap_mode = 2
-fog_light_color = Color(0.884246, 0.896155, 0.914877, 1)
-fog_light_energy = 0.02
-fog_density = 0.2
-volumetric_fog_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.241347, 0.264897, 0.301922, 1)
+fog_light_energy = 0.2
+fog_density = 0.1469
 volumetric_fog_density = 0.18
 volumetric_fog_emission_energy = 0.3
 
