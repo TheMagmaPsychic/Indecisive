@@ -116,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 shape = SubResource("BoxShape3D_xd500")
 
 [node name="Player" parent="." instance=ExtResource("3_iejed")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.5874, 15.4502, 19)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17.5874, 15.4502, 19)
 base_friction = 0.5
 
 [node name="PlayerSpawn" type="Marker3D" parent="."]
