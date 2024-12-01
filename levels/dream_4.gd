@@ -1,6 +1,6 @@
 extends Node3D
 
-var color_cycle: Array[Color] = [Color("8a210a"), Color("315196"), Color.BLACK]
+var color_cycle: Array[Color] = [Color.RED, Color.BLUE, Color.BLACK]
 var color_index: int = 0
 var is_maze_ready: bool = true
 var collected_items: int = 0
@@ -33,9 +33,8 @@ func _on_pickup_item_collected() -> void:
 	collected_items += 1
 	if collected_items == 3:
 		$Commands/Wake.play()
-		SignalBus.set_text_request.emit("Wake")
 		await $Commands/Wake.finished
-		SignalBus.level_end.emit("inn", collected_items, 0)
+		SignalBus.level_end.emit("inn", collected_items, )
 	else:
 		$Commands/Retrieve.play()
 

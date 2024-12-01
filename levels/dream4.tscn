@@ -63,17 +63,14 @@ script = ExtResource("1_ro11q")
 stream = ExtResource("2_nu0qg")
 volume_db = -7.495
 autoplay = true
-bus = &"Music"
 
 [node name="Commands" type="Node" parent="."]
 
 [node name="Retrieve" type="AudioStreamPlayer" parent="Commands"]
 stream = ExtResource("2_jenca")
-bus = &"Voice"
 
 [node name="Wake" type="AudioStreamPlayer" parent="Commands"]
 stream = ExtResource("4_b70vy")
-bus = &"Voice"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 42.3491, 19, 0)
@@ -91,9 +88,9 @@ light_color = Color(0.732505, 0.694319, 0.530931, 1)
 spot_range = 36.938
 spot_angle = 45.2292
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 stream = ExtResource("2_n1a3i")
-bus = &"Voice"
 
 [node name="Maze" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0236, 2.46376, -20.395)
@@ -223,8 +220,7 @@ wait_time = 5.0
 
 [node name="MazeRumble" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_gufsx")
-volume_db = 5.622
-bus = &"Voice"
+volume_db = 3.748
 
 [connection signal="item_collected" from="Maze/Maze/Pedestal/StartPickup" to="." method="_on_start_pickup_item_collected"]
 [connection signal="item_collected" from="Maze/Maze/Pedestal2/Pickup2" to="." method="_on_pickup_item_collected"]
