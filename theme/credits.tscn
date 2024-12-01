@@ -156,7 +156,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 10
-text = "Game Design"
+text = "Game Design, Writing"
 horizontal_alignment = 1
 
 [node name="HSeparator4" type="HSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
@@ -185,7 +185,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 10
-text = "Art"
+text = "Artist"
 horizontal_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -211,7 +211,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 10
-text = "Art"
+text = "Artist"
 horizontal_alignment = 1
 
 [node name="HSeparator5" type="HSeparator" parent="Control/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
