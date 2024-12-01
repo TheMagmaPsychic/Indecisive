@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxvf8ska1280o"
+path="res://.godot/imported/plague doctor dialogue-11.wav-2e516fc418c17c7399926dda439af907.sample"
+
+[deps]
+
+source_file="res://sounds/voice_lines/plague doctor dialogue-11.wav"
+dest_files=["res://.godot/imported/plague doctor dialogue-11.wav-2e516fc418c17c7399926dda439af907.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

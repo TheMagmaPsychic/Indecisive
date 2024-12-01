@@ -1,12 +1,14 @@
-[gd_scene load_steps=24 format=3 uid="uid://c735ol587klif"]
+[gd_scene load_steps=26 format=3 uid="uid://c735ol587klif"]
 
 [ext_resource type="Script" path="res://levels/dream_2.gd" id="1_3tdal"]
 [ext_resource type="MeshLibrary" uid="uid://dgk884awm76mk" path="res://models/mesh_library.tres" id="2_g2u1p"]
 [ext_resource type="AudioStream" uid="uid://b6nf1qma3rcem" path="res://sounds/tracks/TavernDream.wav" id="2_p8yf4"]
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="3_0h774"]
 [ext_resource type="AudioStream" uid="uid://w3fxyh7pgvli" path="res://sounds/commands/09-Wake.wav" id="3_1hq8u"]
+[ext_resource type="AudioStream" uid="uid://cno0diowway1e" path="res://sounds/commands/07-Evade.wav" id="3_t2hk2"]
 [ext_resource type="AudioStream" uid="uid://cjw8t16h6uxhq" path="res://sounds/commands/02-Retrieve.wav" id="3_wyprq"]
 [ext_resource type="PackedScene" uid="uid://dvgrt4kdsahg" path="res://character/navigation_character.tscn" id="4_rmthe"]
+[ext_resource type="AudioStream" uid="uid://c0safl3qb5ado" path="res://sounds/commands/05-Escape.wav" id="5_qvgmh"]
 [ext_resource type="Script" path="res://scripted_objects/collectable.gd" id="6_rppyy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5fcih"]
@@ -79,6 +81,7 @@ bus = &"Music"
 [node name="Commands" type="Node" parent="."]
 
 [node name="Evade" type="AudioStreamPlayer" parent="Commands"]
+stream = ExtResource("3_t2hk2")
 bus = &"Voice"
 
 [node name="Retrieve" type="AudioStreamPlayer" parent="Commands"]
@@ -86,6 +89,7 @@ stream = ExtResource("3_wyprq")
 bus = &"Voice"
 
 [node name="Escape" type="AudioStreamPlayer" parent="Commands"]
+stream = ExtResource("5_qvgmh")
 bus = &"Voice"
 
 [node name="Wake" type="AudioStreamPlayer" parent="Commands"]

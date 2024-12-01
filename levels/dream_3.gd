@@ -12,7 +12,7 @@ const ROUNDS = 3
 const TRIES = 3
 const EXIT_POS: Array[Array] = [[0, 3],
 								[15, -12],
-								[0, 3],
+								[3, 0],
 								[-1, -1]]
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +24,9 @@ func show_path():
 	#say task
 	wait_timer.start()
 	await wait_timer.timeout
-	SignalBus.path_move_request.emit()
+	SignalBus.path_move_request.emit(8 + fails*2)
+	wait_timer.start()
+	await wait_timer.timeout
 	wait_timer.start()
 	await wait_timer.timeout
 	$PlayerBox/StaticBody3D/front.disabled = true
