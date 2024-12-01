@@ -608,10 +608,11 @@ shape = SubResource("ConvexPolygonShape3D_jko10")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, -14.0075)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="EndRoom"]
-transform = Transform3D(-3.40946e-08, -0.625787, 0.779994, -2.7354e-08, 0.779994, 0.625787, -1, -1.77636e-15, -4.37114e-08, 76, -142, 0)
+transform = Transform3D(-3.40946e-08, -0.625787, 0.779994, -2.7354e-08, 0.779994, 0.625787, -1, 1.77636e-15, -4.37114e-08, 75.5024, -142, 0)
 light_energy = 5.5
 light_specular = 3.0
 shadow_enabled = true
+shadow_reverse_cull_face = true
 distance_fade_length = 1664.95
 spot_range = 44.8833
 spot_angle = 30.0
