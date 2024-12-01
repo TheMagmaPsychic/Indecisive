@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://crtbriqm41pih"
-path="res://.godot/imported/Owl_Mask.gltf-9991e38795c4fa6f8e48d5d0788fe6af.scn"
+uid="uid://dtptygjtvc33a"
+path="res://.godot/imported/Rabbit_Mask1.gltf-5dd56fa3cb9d3ef6bc90812249ad1f13.scn"
 
 [deps]
 
-source_file="res://models/Clave'sStuff/UnfinishedDay_1/Owl_Mask.gltf"
-dest_files=["res://.godot/imported/Owl_Mask.gltf-9991e38795c4fa6f8e48d5d0788fe6af.scn"]
+source_file="res://models/Clave'sStuff/Day2/Rabbit_Mask1.gltf"
+dest_files=["res://.godot/imported/Rabbit_Mask1.gltf-5dd56fa3cb9d3ef6bc90812249ad1f13.scn"]
 
 [params]
 
@@ -32,7 +32,7 @@ animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={}
-fbx/importer=1
+fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1
 gltf/naming_version=1
