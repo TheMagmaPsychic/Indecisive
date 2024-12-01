@@ -117,7 +117,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 2, 0)
 
 [node name="Player" parent="." instance=ExtResource("3_0h774")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0424598, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96028, 0)
 base_friction = 0.5
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player"]
