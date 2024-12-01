@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://efmugjirbhf6"]
+[gd_scene load_steps=67 format=3 uid="uid://efmugjirbhf6"]
 
 [ext_resource type="Script" path="res://levels/dream_1.gd" id="1_lbxlr"]
 [ext_resource type="PackedScene" uid="uid://benshrhyqaw07" path="res://player/player.tscn" id="2_i1l2d"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://towybnlkqqby" path="res://scripted_objects/moveable.tscn" id="5_wkyjq"]
 [ext_resource type="AudioStream" uid="uid://bibwqdnnupnqa" path="res://sounds/ball_bounce.mp3" id="5_x7hyi"]
 [ext_resource type="AudioStream" uid="uid://5fynkigh4uk7" path="res://sounds/Dungeon Door Close Wet A.wav" id="6_pr3sw"]
+[ext_resource type="Material" uid="uid://b7egp246ip2y1" path="res://Textures/dream1.tres" id="6_s50m5"]
 [ext_resource type="AudioStream" uid="uid://6jgxgqwmovko" path="res://sounds/commands/01-Jump.wav" id="8_syljp"]
 [ext_resource type="AudioStream" uid="uid://cjw8t16h6uxhq" path="res://sounds/commands/02-Retrieve.wav" id="9_woi0y"]
 [ext_resource type="AudioStream" uid="uid://cq8486s1t650g" path="res://sounds/commands/03-Deposit.wav" id="10_tryee"]
@@ -34,18 +35,21 @@ material = SubResource("StandardMaterial3D_lv0rw")
 size = Vector3(20, 1, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h3v7d"]
+material = ExtResource("6_s50m5")
 size = Vector2(20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uf2m6"]
 size = Vector3(1, 20, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_oq1k0"]
+material = ExtResource("6_s50m5")
 size = Vector3(1, 20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i2q2h"]
 size = Vector3(20, 20, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ij27h"]
+material = ExtResource("6_s50m5")
 size = Vector3(1, 20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tu7vt"]
@@ -53,18 +57,21 @@ size = Vector3(20, 20, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6hdws"]
 resource_local_to_scene = true
+material = ExtResource("6_s50m5")
 size = Vector3(1, 20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_scyne"]
 size = Vector3(1, 20, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pqyoo"]
+material = ExtResource("6_s50m5")
 size = Vector3(1, 20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tq6py"]
 size = Vector3(19, 1, 19)
 
 [sub_resource type="BoxMesh" id="BoxMesh_g346d"]
+material = ExtResource("6_s50m5")
 size = Vector3(20, 1, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vmeqn"]
@@ -74,6 +81,7 @@ size = Vector3(1.97847, 4.5127, 19.5428)
 size = Vector3(30, 1, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_cn4d8"]
+material = ExtResource("6_s50m5")
 size = Vector2(30, 19)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wqu86"]
@@ -83,12 +91,14 @@ size = Vector3(1, 150, 20)
 size = Vector3(30, 20, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_y3rig"]
+material = ExtResource("6_s50m5")
 size = Vector3(1, 20, 30)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t7vm6"]
 size = Vector3(30, 20, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xjcpc"]
+material = ExtResource("6_s50m5")
 size = Vector3(1, 20, 30)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_jb6pk"]
@@ -225,7 +235,6 @@ shape = SubResource("BoxShape3D_op4ru")
 
 [node name="FloorMesh" type="MeshInstance3D" parent="StartRoom/RoomWalls/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-material_override = ExtResource("5_sbrew")
 mesh = SubResource("PlaneMesh_h3v7d")
 skeleton = NodePath("../../../..")
 
@@ -291,7 +300,6 @@ shape = SubResource("BoxShape3D_op4ru")
 
 [node name="FloorMesh" type="MeshInstance3D" parent="BallRoom/RoomWalls/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-material_override = ExtResource("5_sbrew")
 mesh = SubResource("PlaneMesh_h3v7d")
 skeleton = NodePath("../../../..")
 
@@ -349,7 +357,6 @@ shape = SubResource("BoxShape3D_6vk3n")
 
 [node name="FloorMesh" type="MeshInstance3D" parent="PedestalRoom/RoomWalls/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-material_override = ExtResource("5_sbrew")
 mesh = SubResource("PlaneMesh_cn4d8")
 skeleton = NodePath("../../../..")
 

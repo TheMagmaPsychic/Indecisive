@@ -9,6 +9,7 @@ extends CanvasLayer
 @export var credits: PackedScene
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	AudioServer.set_bus_volume_db(music_bus, linear_to_db($PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/MusicSlider.value))
 	AudioServer.set_bus_volume_db(volum_bus, linear_to_db($PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/VoiceSlider.value))
 

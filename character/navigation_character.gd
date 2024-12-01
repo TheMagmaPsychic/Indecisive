@@ -10,7 +10,7 @@ extends CharacterBody3D
 @export var patrol_pause_time: float = 1.0
 
 
-@onready var nav_agent = $NavigationAgent3D
+
 
 var is_target_reached: bool = false
 var needs_to_turn: bool = false
@@ -18,6 +18,9 @@ var is_turning: bool = false
 var patrol_point_index: int = 0
 var cur_patrol_pause_time: float = 1.1
 @onready var timer: Timer = $Timer
+@onready var nav_agent = $NavigationAgent3D
+
+signal caught_player
 
 
 func _ready() -> void:

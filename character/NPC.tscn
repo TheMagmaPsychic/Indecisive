@@ -1,19 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://u5ar3y50dajx"]
+[gd_scene load_steps=2 format=3 uid="uid://u5ar3y50dajx"]
 
 [ext_resource type="Script" path="res://character/Jimmy.gd" id="1_yrr72"]
-[ext_resource type="PackedScene" uid="uid://crtbriqm41pih" path="res://models/Clave'sStuff/UnfinishedDay_1/Owl_Mask.gltf" id="2_3soyk"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2ja4x"]
 
 [node name="Node3D" type="StaticBody3D" groups=["Interactable"]]
 script = ExtResource("1_yrr72")
-
-[node name="Owl_Mask" parent="." instance=ExtResource("2_3soyk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1951, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_2ja4x")

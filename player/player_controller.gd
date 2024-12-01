@@ -66,7 +66,7 @@ func _input(event):
 		$Camera.rotation.x = clampf($Camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("Interact"):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if event.is_action_pressed("b button"):
 		$Camera.current = !$Camera.current

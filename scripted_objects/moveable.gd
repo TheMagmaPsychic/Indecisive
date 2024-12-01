@@ -33,6 +33,7 @@ func _process(delta: float) -> void:
 
 func interact(player: Player) -> void:
 	if not is_held and is_interactable and not is_on_cooldown:
+		hover_text = ""
 		object_interacted_with.emit()
 		is_held = true
 		

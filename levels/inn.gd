@@ -3,7 +3,7 @@ extends Node3D
 @export var dialogue_list: Array[Resource]
 @export var dialogue_text: Array[String]
 
-var dialogue_groups: Array[Array] = [[1,2,5], [1,6], [3,4], [8]]
+var dialogue_groups: Array[Array] = [[1,2,5], [11,6], [3,4], [12, 8]]
 
 @onready var player_spawn: Marker3D = $PlayerSpawn
 @onready var dialogue_player: AudioStreamPlayer = $DialoguePlayer
@@ -41,6 +41,7 @@ func say_dialogue():
 	var dialogue_group: Array = dialogue_groups[Global.day-1]
 	for dialogue_number in dialogue_group:
 		dialogue_player.stream = dialogue_list[dialogue_number-1]
+		SignalBus.set_text_request.emit(dialogue_text[dialogue_number-1])
 		dialogue_player.play()
 		await dialogue_player.finished
 	var door_tween = create_tween()

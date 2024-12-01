@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2q0k5wqsjyig"]
+[gd_scene load_steps=28 format=3 uid="uid://d2q0k5wqsjyig"]
 
 [ext_resource type="MeshLibrary" uid="uid://dgk884awm76mk" path="res://models/mesh_library.tres" id="1_8vys5"]
 [ext_resource type="Script" path="res://levels/dream_5.gd" id="1_ubiu2"]
@@ -11,6 +11,13 @@
 background_mode = 1
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+fog_height = -40.55
+fog_depth_begin = 400.0
+fog_depth_end = 400.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vipc5"]
 size = Vector3(15, 5, 1)
@@ -29,6 +36,48 @@ height = 1.43169
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_upq02"]
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_a12xg"]
+plane = Plane(0, 0, 1, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oinwo"]
+size = Vector3(30, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_awwvi"]
+size = Vector3(30, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2rx15"]
+size = Vector3(1, 10, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x7ydr"]
+size = Vector3(1, 10, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ih2d"]
+size = Vector3(20, 10, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c4vgs"]
+size = Vector3(20, 10, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y07av"]
+size = Vector3(1, 10, 7)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_07bhc"]
+points = PackedVector3Array(-0.579365, -5.07738, -3.57936, 0.5, 4.78724, 3.35941, -0.579365, 5.07738, 3.56349, -0.579365, 5.07738, -3.57936, -0.579365, -5.07738, 3.56349, 0.5, -4.78724, -3.37528, 0.5, 4.78724, -3.37528, 0.5, -4.78724, 3.35941)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1r8c2"]
+points = PackedVector3Array(-0.579365, -5.07738, -3.57936, 0.5, 4.78724, 3.35941, -0.579365, 5.07738, 3.56349, -0.579365, 5.07738, -3.57936, -0.579365, -5.07738, 3.56349, 0.5, -4.78724, -3.37528, 0.5, 4.78724, -3.37528, 0.5, -4.78724, 3.35941)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xeapp"]
+size = Vector3(1, 4, 5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1qrur"]
+points = PackedVector3Array(0.571429, 2.00794, 2.53869, -0.5, -1.89512, -2.35735, -0.5, 1.86338, -2.35735, 0.571429, -2.03968, -2.53869, -0.5, -1.89512, 2.35735, 0.571429, 2.00794, -2.53869, 0.571429, -2.03968, 2.53869, -0.5, 1.86338, 2.35735)
+
+[sub_resource type="BoxMesh" id="BoxMesh_norrj"]
+size = Vector3(1, 6, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ghb8"]
+size = Vector3(1, 6, 5)
+
 [node name="Dream5" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 script = ExtResource("1_ubiu2")
@@ -36,16 +85,20 @@ script = ExtResource("1_ubiu2")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 11, 0)
 light_energy = 0.0
+light_cull_mask = 4294967167
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 11, 0)
 light_energy = 0.0
+light_cull_mask = 4294967167
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iomcp")
 
 [node name="Wake" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_hta0u")
+max_polyphony = 20
+bus = &"Voice"
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_8vys5")
@@ -117,5 +170,147 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 17)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.08341, 0)
 omni_range = 12.6261
 
+[node name="EndTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -186)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndTrigger"]
+shape = SubResource("WorldBoundaryShape3D_a12xg")
+
+[node name="EndRoom" type="Node" parent="."]
+
+[node name="Floor" type="RigidBody3D" parent="EndRoom"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1, -209.286)
+collision_layer = 128
+collision_mask = 128
+mass = 0.95
+freeze = true
+linear_velocity = Vector3(0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/Floor"]
+layers = 128
+mesh = SubResource("BoxMesh_oinwo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/Floor"]
+shape = SubResource("BoxShape3D_awwvi")
+
+[node name="xWall" type="RigidBody3D" parent="EndRoom"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 4, -224.286)
+collision_layer = 128
+collision_mask = 128
+mass = 2.0
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/xWall"]
+layers = 128
+mesh = SubResource("BoxMesh_2rx15")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/xWall"]
+shape = SubResource("BoxShape3D_x7ydr")
+
+[node name="zWall" type="RigidBody3D" parent="EndRoom"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.5, 4, -214.286)
+collision_layer = 128
+collision_mask = 128
+freeze = true
+angular_velocity = Vector3(0.00174533, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/zWall"]
+layers = 128
+mesh = SubResource("BoxMesh_3ih2d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/zWall"]
+shape = SubResource("BoxShape3D_c4vgs")
+
+[node name="-zWall" type="RigidBody3D" parent="EndRoom"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.5, 4, -214.286)
+collision_layer = 128
+collision_mask = 128
+freeze = true
+linear_velocity = Vector3(0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/-zWall"]
+layers = 128
+mesh = SubResource("BoxMesh_3ih2d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/-zWall"]
+shape = SubResource("BoxShape3D_c4vgs")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="EndRoom/-zWall"]
+transform = Transform3D(-3.40946e-08, -0.625787, 0.779994, -2.7354e-08, 0.779994, 0.625787, -1, 3.55271e-15, -4.37114e-08, 10, 3, 9.5)
+light_color = Color(0.176471, 0.67451, 0.0901961, 1)
+light_energy = 11.29
+light_specular = 3.0
+shadow_enabled = true
+distance_fade_length = 1664.95
+spot_range = 44.8833
+spot_angle = 30.0
+
+[node name="Front wall" type="RigidBody3D" parent="EndRoom"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 4, -204.786)
+collision_layer = 128
+collision_mask = 128
+mass = 1.2
+freeze = true
+constant_torque = Vector3(0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/Front wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+layers = 128
+mesh = SubResource("BoxMesh_y07av")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/Front wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+shape = SubResource("ConvexPolygonShape3D_07bhc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="EndRoom/Front wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+layers = 128
+mesh = SubResource("BoxMesh_y07av")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="EndRoom/Front wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+shape = SubResource("ConvexPolygonShape3D_1r8c2")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="EndRoom/Front wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5)
+layers = 128
+mesh = SubResource("BoxMesh_xeapp")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="EndRoom/Front wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -5)
+shape = SubResource("ConvexPolygonShape3D_1qrur")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="EndRoom/Front wall"]
+transform = Transform3D(1.053e-07, 0.625787, -0.779994, -4.42515e-08, 0.779994, 0.625787, 1, -3.13796e-08, 1.09826e-07, -33, 16, -5)
+light_energy = 7.896
+light_specular = 3.0
+shadow_enabled = true
+distance_fade_length = 1664.95
+spot_range = 44.8833
+spot_angle = 30.0
+
+[node name="Door" type="RigidBody3D" parent="EndRoom"]
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -2.5, 2, -204.286)
+collision_layer = 128
+collision_mask = 128
+mass = 0.9
+freeze = true
+angular_velocity = Vector3(0.523599, 0, 0.698132)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EndRoom/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+layers = 128
+mesh = SubResource("BoxMesh_norrj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EndRoom/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 2.5)
+shape = SubResource("BoxShape3D_7ghb8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+one_shot = true
+
 [connection signal="body_entered" from="DoorTrigger" to="." method="_on_door_trigger_body_entered"]
 [connection signal="item_collected" from="Button" to="." method="_on_button_item_collected"]
+[connection signal="body_entered" from="EndTrigger" to="." method="_on_end_trigger_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
