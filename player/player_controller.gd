@@ -17,6 +17,7 @@ var print_speed: bool = false
 var print_friction: bool = false
 var print_input:bool = false
 var print_position:bool = false
+var is_talking:bool = false
 
 var input:Vector2 = Vector2(0, 0)
 var movement_dir:Vector3 = Vector3(0, 0, 0)
@@ -267,6 +268,7 @@ func continue_jump(delta):
 	velocity.y = clamp(velocity.y, -16, 10)
 	
 func unlock_mouse(_resource):
+	is_talking = false
 	capture_mouse = (Input.mouse_mode == Input.MOUSE_MODE_CAPTURED)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 

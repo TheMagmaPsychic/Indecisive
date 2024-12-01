@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://w1xjtf1rd76i"]
+[gd_scene load_steps=8 format=3 uid="uid://w1xjtf1rd76i"]
 
 [ext_resource type="Script" path="res://theme/Start Screen.gd" id="1_dht2j"]
 [ext_resource type="PackedScene" uid="uid://cvx7jemg3eoaw" path="res://theme/credits.tscn" id="3_dle77"]
+[ext_resource type="Texture2D" uid="uid://b3uovb4xf0ed6" path="res://theme/plague_doc.png" id="3_oowv5"]
 [ext_resource type="AudioStream" uid="uid://bwg3nyr8cd8il" path="res://sounds/tracks/Dreamer.wav" id="3_pkvgt"]
 [ext_resource type="AudioStream" uid="uid://6jgxgqwmovko" path="res://sounds/commands/01-Jump.wav" id="4_50mf7"]
 
@@ -17,8 +18,13 @@ credits = ExtResource("3_dle77")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -237.0
+offset_top = -65.0
+offset_right = 531.0
+offset_bottom = 367.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("3_oowv5")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
