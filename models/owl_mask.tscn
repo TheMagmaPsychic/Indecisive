@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b801fpn8y8gqa"]
+
+[ext_resource type="PackedScene" uid="uid://dha15psgm1tlm" path="res://models/Clave'sStuff/Day3/Owl_Mask.gltf" id="1_wv6hc"]
+
+[node name="Owl_Mask" instance=ExtResource("1_wv6hc")]
+
+[node name="Skeleton3D" parent="metarig" index="0"]
+bones/0/position = Vector3(0, 0.0205259, -0.0620002)
+bones/4/position = Vector3(-4.34415e-10, 0.2248, -0.000210049)
+bones/7/position = Vector3(0.0220605, 0.158067, 0.0941208)
+bones/8/position = Vector3(0.00795839, 0.286447, -0.0266179)
+bones/8/rotation = Quaternion(-0.359059, 0.630648, -0.484277, 0.488708)
+bones/11/position = Vector3(-0.0220605, 0.158067, 0.0941208)
+bones/12/position = Vector3(-0.00795839, 0.286447, -0.0266179)
+bones/12/rotation = Quaternion(-0.359059, -0.630648, 0.484277, 0.488708)
+bones/15/position = Vector3(0.147838, -0.0277354, -0.0521674)
+bones/16/position = Vector3(-0.147838, -0.0277354, -0.0521674)
+bones/17/rotation = Quaternion(0.170562, 0.771365, 0.365063, -0.492578)
+bones/27/rotation = Quaternion(-4.31924e-08, 0.997629, -0.0688192, -6.69952e-07)
+
+[node name="AnimationPlayer" parent="." index="2"]
+autoplay = "Breathe2"

@@ -18,12 +18,11 @@ credits = ExtResource("3_dle77")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -237.0
-offset_top = -65.0
-offset_right = 531.0
-offset_bottom = 367.0
+offset_right = 1163.0
+offset_bottom = 654.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_oowv5")
 
 [node name="Control" type="Control" parent="."]

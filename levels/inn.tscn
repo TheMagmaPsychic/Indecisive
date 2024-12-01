@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://cxvf8ska1280o" path="res://sounds/voice_lines/plague doctor dialogue-11.wav" id="12_gifbw"]
 [ext_resource type="AudioStream" uid="uid://6u6ubjj4442c" path="res://sounds/voice_lines/plague doctor dialogue-12.wav" id="13_pogqq"]
 [ext_resource type="PackedScene" uid="uid://cktk4k2430sca" path="res://models/Clave'sStuff/Day2/rabbit_mask_1.tscn" id="18_2kgg6"]
-[ext_resource type="PackedScene" uid="uid://crtbriqm41pih" path="res://models/Clave'sStuff/UnfinishedDay_1/Owl_Mask.gltf" id="20_8hvjc"]
+[ext_resource type="PackedScene" uid="uid://b801fpn8y8gqa" path="res://models/owl_mask.tscn" id="20_7algl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8v45t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -116,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
 shape = SubResource("BoxShape3D_xd500")
 
 [node name="Player" parent="." instance=ExtResource("3_iejed")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17.5874, 15.4502, 19)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.5874, 15.4502, 19)
 base_friction = 0.5
 
 [node name="PlayerSpawn" type="Marker3D" parent="."]
@@ -125,7 +125,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17.587
 [node name="Characters" type="Node" parent="."]
 
 [node name="Mother" parent="Characters" instance=ExtResource("3_20for")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 15.4735, 8)
+transform = Transform3D(-0.532906, 0, 0.846175, 0, 1, 0, -0.846175, 0, -0.532906, 6.79845, 15.4735, 14)
 dialogue_file = ExtResource("4_4qw0s")
 
 [node name="Rabbit_Mask1" parent="Characters/Mother" instance=ExtResource("18_2kgg6")]
@@ -135,18 +135,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11732, 0)
 shape = SubResource("CapsuleShape3D_pxre7")
 
 [node name="Soldier" parent="Characters" instance=ExtResource("3_20for")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 15.4735, 5)
+transform = Transform3D(1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, 1, 9, 15.4735, -7.34066)
 dialogue_file = ExtResource("5_0hh4q")
 
-[node name="Owl_Mask" parent="Characters/Soldier" instance=ExtResource("20_8hvjc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2286, 0)
+[node name="Owl_Mask" parent="Characters/Soldier" instance=ExtResource("20_7algl")]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 1.24301, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Characters/Soldier"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21724, 0)
 shape = SubResource("CapsuleShape3D_aai0l")
 
 [node name="Teacher" parent="Characters" instance=ExtResource("3_20for")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 15.4735, 2)
+transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 4.64546, 15.4735, 8.4128)
 dialogue_file = ExtResource("6_o2gpo")
 
 [node name="Rabbit_Mask1" parent="Characters/Teacher" instance=ExtResource("18_2kgg6")]
@@ -156,10 +156,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11556, 0)
 shape = SubResource("CapsuleShape3D_r3p42")
 
 [node name="Leader" parent="Characters" instance=ExtResource("3_20for")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 16.6904, -1)
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 15.4457, 16.6904, 2.71949)
 dialogue_file = ExtResource("7_jymos")
 
-[node name="Owl_Mask" parent="Characters/Leader" instance=ExtResource("20_8hvjc")]
+[node name="Owl_Mask" parent="Characters/Leader" instance=ExtResource("20_7algl")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Characters/Leader"]
 shape = SubResource("CapsuleShape3D_aai0l")
