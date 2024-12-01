@@ -5,7 +5,8 @@ var levels_dict: Dictionary = {
 	"dream1":preload("res://levels/dream1.tscn"),
 	"dream2":preload("res://levels/dream2.tscn"),
 	"dream3":preload("res://levels/dream3.tscn"),
-	"dream4":preload("res://levels/dream4.tscn")
+	"dream4":preload("res://levels/dream4.tscn"),
+	"dream5":preload("res://levels/dream5.tscn")
 }
 var cur_level_instance: Node3D
 @onready var level_holder: Node = $LevelHolder

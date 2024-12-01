@@ -29,5 +29,8 @@ You look tired today, doctor. After you see Alice, please make sure you get some
 
 ~ Day4
 Duis non tortor semper, facilisis dolor eget, pulvinar est. Ut tempor consequat massa, a dapibus mi dictum sit amet.
-#go right into crazy dream.
+- What
+	do SignalBus.level_end.emit("dream5",0,0)
+- What
+	do SignalBus.level_end.emit("dream5",0,0)
 => END
