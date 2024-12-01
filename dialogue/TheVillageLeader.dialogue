@@ -16,20 +16,18 @@
 => END
 
 ~ Day1
-Not yet
+Thank you so much for coming. I believe Jimmy is your first patient.
 => END
 
 ~ Day2
-Not yet
+Good morning, doctor. Elenor is your patient today. 
 => END
 
 ~ Day3
-Not yet
+You look tired today, doctor. After you see Alice, please make sure you get some rest.
 => END
 
 ~ Day4
-Oh is it my turn already
-- Start examination
-
-- I need more time to prepare
+Duis non tortor semper, facilisis dolor eget, pulvinar est. Ut tempor consequat massa, a dapibus mi dictum sit amet.
+#go right into crazy dream.
 => END

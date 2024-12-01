@@ -12,20 +12,22 @@
 
 
 ~ Day1
-Not yet
+Are you the doctor? Jimmy is in the other room. 
 => END
 
 ~ Day2
-Oh is it my turn already
+Elenor: Pleased to meet you, doctor. I am ready.
 - Start examination
+	Likewise. Then let's begin, shall we?
+	What causes you to feel...
 	do SignalBus.level_end.emit("dream3",0,0)
 - I need more time to prepare
 => END
 
 ~ Day3
-You've already done me
+Elenor: Doctor, I want to thank you for helping me. It feels like my head is clear of a fog that’s been around for far too long. Simply miraculous. 
 => END
 
 ~ Day4
-You've already done me
+Etiam a magna ut orci eleifend aliquet. Nunc non tellus id ipsum blandit cursus. 
 => END

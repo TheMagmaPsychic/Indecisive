@@ -11,20 +11,22 @@
 => END
 
 ~ Day1
-Not yet
+You must be looking for Jimmy.
 => END
 
 ~ Day2
-Not yet
+Are you looking for Elenor? She's not in here.
 => END
 
 ~ Day3
-Oh is it my turn already
+Alice: Is it my turn already? Oh dear, I'm not sure whether I can do this or not.
 - Start examination
+	We will begin regardless. 
+	When did you first begin...
 	do SignalBus.level_end.emit("dream4",0,0)
 - I need more time to prepare
 => END
 
 ~ Day4
-You've already done me
+Donec ante purus, posuere sit amet felis nec.
 => END

@@ -11,20 +11,22 @@
 => END
 
 ~ Day1
-Oh is it my turn already
+Jimmy: I'm ready when you are, doc.
 - Start examination
+	Okay, Jimmy. Let's begin the examination.
+	When did you last...
 	do SignalBus.level_end.emit("dream2",0,0)
 - I need more time to prepare
 => END
 
 ~ Day2
-You've already done me
+Jimmy: Doctor, whatever you did to me yesterday, it's working already. I feel so much more calm. You're really something.
 => END
 
 ~ Day3
-You've already done me
+Jimmy: Have we met before? Leave now, before I throw you off the premises.
 => END
 
 ~ Day4
-You've already done me
+Ut enim ad minim veniam?
 => END
